@@ -69,7 +69,7 @@
                                             <td>{{$data->worker->nip}}</td>
                                             <td>{{$data->worker->name}}</td>
                                             <td>{{$data->worker->dept->name}}</td>
-                                            <td>{{$data->tanggal}}</td>
+                                            <td>{{$data->tanggal_mulai}} - {{$data->tanggal_akhir}}</td>
                                             <td>{{$data->available_jadwal->name}}</td>
                                         </tr>
                                     @endforeach
