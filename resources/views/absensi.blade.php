@@ -78,12 +78,14 @@
                                             <td>{{ $data->worker->name }}</td>
                                             <td>{{ $data->worker->dept->name }}</td>
                                             <td>{{ $data->tanggal }}</td>
-                                            <td>{{ $data->jam_absen }}</td>
                                             <td>
-                                                @if ($data->status->id == '2')
-                                                    <span class="badge bg-danger">{{ $data->status->name }}</span>
+                                                {{$data->jam_absen}}
+                                            </td>
+                                            <td>
+                                                @if ($data->deskripsi == 'masuk')
+                                                    <span class="badge bg-success">{{ $data->deskripsi }}</span>
                                                 @else
-                                                    <span class="badge bg-success">{{ $data->status->name }}</span>
+                                                    <span class="badge bg-danger">{{ $data->deskripsi }}</span>
                                                 @endif
                                             </td>
                                             <td>{{ $data->jadwal->available_jadwal->name }}</td>

@@ -118,10 +118,8 @@
                                                             <td>:</td>
                                                             <td style="width: 200px;">
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;">
-                                                                    <span id="tgl"></span>
-                                                                    <span id="bulan"></span>
-                                                                    <span id="tahun"></span>
+                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;" id="tanggal">
+
                                                                 </span>
                                                             </td>
                                                         </tr>
@@ -132,9 +130,7 @@
                                                             <td>:</td>
                                                             <td>
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;">
-                                                                    <span id="jam"></span>
-                                                                    <span id="menit"></span>
+                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;" id="jam">
                                                                 </span>
                                                             </td>
                                                         </tr>
@@ -202,21 +198,8 @@
         <script type="text/javascript">
             var bulan = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
             $(document).ready(function() {
-                var today = new Date();
-                var j = today.getHours();
-                var min = today.getMinutes();
-                var tgl = today.getDate();
-                var lan = today.getMonth();
-                var tahun = today.getFullYear();
 
-                j = j < 10 ? '0' + j : j;
-                min = min < 10 ? '0' + min : min;
                 $('#nip').on('keyup', function(event) {
-                    document.getElementById('jam').innerHTML = j + ' :';
-                    document.getElementById('menit').innerHTML = min;
-                    document.getElementById('tgl').innerHTML = tgl;
-                    document.getElementById('bulan').innerHTML = month[lan];
-                    document.getElementById('tahun').innerHTML = tahun;
                     var nip = $(this).val();
                     console.log(nip);
 
@@ -230,17 +213,19 @@
                             type: "post",
                             data: {
                                 nip: nip,
-                                type: "absen_masuk"
+                                type: "masuk"
                             },
                             success: function(response) {
                                 if(response.success === false){
-                                    alert(response.message)
+                                    toastr.info(response.message, 'Info !');
                                 }else{
                                     console.log(response);
                                     $('#nip_detail').text(response.data.worker.nip)
                                     $('#name_detail').text(response.data.worker.name)
                                     $('#dept_detail').text(response.data.worker.dept.name);
                                     $('#jadwal_detail').text(response.data.worker.name_jadwal);
+                                    $('#tanggal').text(response.data.date);
+                                    $('#jam').text(response.data.time);
                                 }
                             },
                             error: function(data) {

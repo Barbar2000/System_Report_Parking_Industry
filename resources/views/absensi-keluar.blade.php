@@ -102,76 +102,80 @@
                                             </div>
                                             <div class="col-sm-8 col-xs-8">
                                                 <table class="table" id="table-borderless">
+
                                                     <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <font style="font-size: 20px;">TANGGAL</font>
-                                                            </td>
-                                                            <td>:</td>
-                                                            <td style="width: 200px;">
-                                                                <input style="font-size: 20px;" type="text"
-                                                                    name="tanggal" id="tanggal" class="transparant"
-                                                                    readonly="">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <font style="font-size: 20px;">JAM</font>
-                                                            </td>
-                                                            <td>:</td>
-                                                            <td>
-                                                                <input style="font-size: 20px;" type="text"
-                                                                    name="jam" id="jam" class="transparant"
-                                                                    readonly="">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 100px;">
-                                                                <font style="font-size: 20px;">NIP</font>
-                                                            </td>
-                                                            <td style="width: 1px;">:</td>
-                                                            <td style="width: 200px;">
-                                                                <input type="hidden" readonly="" name="status"
-                                                                    id="status" value="keluar">
-                                                                <input style="font-size: 20px;" type="text"
-                                                                    name="nip_detail" id="nip_detail" class="transparant"
-                                                                    readonly="">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <font style="font-size: 20px;">NAMA</font>
-                                                            </td>
-                                                            <td>:</td>
-                                                            <td>
-                                                                <input style="font-size: 20px;" type="text"
-                                                                    name="name_detail" id="name_detail" class="transparant"
-                                                                    readonly="">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <font style="font-size: 20px;">DEPT </font>
-                                                            </td>
-                                                            <td>:</td>
-                                                            <td>
-                                                                <input style="font-size: 20px;" type="text"
-                                                                    name="departemen_detail" id="departemen_detail"
-                                                                    class="transparant" readonly="">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <font style="font-size: 20px;">JADWAL </font>
-                                                            </td>
-                                                            <td>:</td>
-                                                            <td>
-                                                                <input style="font-size: 20px;" type="text"
-                                                                    name="jadwal_detail" id="jadwal_detail"
-                                                                    class="transparant" readonly="">
-                                                            </td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <font style="font-size: 20px;">TANGGAL</font>
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td style="width: 200px;">
+                                                                <span
+                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;" id="tanggal">
+                                                                </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <font style="font-size: 20px;">JAM</font>
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td>
+                                                                <span
+                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;" id="jam">
+                                                                </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 100px;">
+                                                            <font style="font-size: 20px;">NIP</font>
+                                                        </td>
+                                                        <td style="width: 1px;">:</td>
+                                                        <td style="width: 200px;">
+                                                                <span
+                                                                    style="height: 30px; text-transform: uppercase;  font-size: 20px;"
+                                                                    id="nip_detail">
+                                                                </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <font style="font-size: 20px;">NAMA</font>
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td>
+                                                                <span
+                                                                    style="height: 30px; text-transform: uppercase;  font-size: 20px;"
+                                                                    id="name_detail">
+                                                                </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <font style="font-size: 20px;">DEPT </font>
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td>
+                                                                <span
+                                                                    style="height: 30px; text-transform: uppercase;  font-size: 20px;"
+                                                                    id="dept_detail">
+                                                                </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <font style="font-size: 20px;">JADWAL </font>
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td>
+                                                                <span
+                                                                    style="height: 30px; text-transform: uppercase;  font-size: 20px;"
+                                                                    id="jadwal_detail">
+                                                                </span>
+                                                        </td>
+                                                    </tr>
                                                     </tbody>
+
                                                 </table>
                                             </div>
                                         </div>
@@ -184,4 +188,45 @@
             </div>
         </div>
     </section>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#nip').on('keyup', function(event) {
+
+                var nip = $(this).val();
+                console.log(nip);
+
+                totLength = nip.length;
+                if (totLength >= 7) {
+                    $.ajax({
+                        url: "{{ url('inputabsen') }}",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "post",
+                        data: {
+                            nip: nip,
+                            type: "keluar"
+                        },
+                        success: function(response) {
+                            if(response.success === false){
+                                toastr.info(response.message, 'Info !');
+                            }else{
+                                console.log(response);
+                                $('#nip_detail').text(response.data.worker.nip)
+                                $('#name_detail').text(response.data.worker.name)
+                                $('#dept_detail').text(response.data.worker.dept.name);
+                                $('#jadwal_detail').text(response.data.worker.name_jadwal);
+                                $('#tanggal').text(response.data.date);
+                                $('#jam').text(response.data.time);
+                            }
+                        },
+                        error: function(data) {
+                            alert("Error!! Hubungi IT");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 @endsection

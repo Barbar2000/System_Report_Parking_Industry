@@ -32,7 +32,7 @@
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        
+
 </head>
 
 <body class="hold-transition sidebar-mini sidebar-collapse">
@@ -200,7 +200,7 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('lte/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('lte/dist/js/demo.js') }}"></script>
+{{--    <script src="{{ asset('lte/dist/js/demo.js') }}"></script>--}}
     <!--  Ion Icon -->
     <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
     <!-- Toastr -->
@@ -273,7 +273,7 @@
     });
 </script>
 
-{{-- <script>
+ <script>
     var daysofweek = ['sun', 'mon', 'tus', 'wed', 'thu', 'fri', 'sat'];
     var month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
@@ -302,7 +302,7 @@
         document.getElementById('year').innerHTML = year;
     }
     var inter = setInterval(jam_aktual, 400)
-</script> --}}
+</script>
 
 <script>
     function nip_detail() {

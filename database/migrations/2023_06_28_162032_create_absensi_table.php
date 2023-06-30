@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('worker_id')->required();
             $table->foreign('worker_id')->references('id')->on('workers')->onDelete('restrict');
             $table->date('tanggal')->required();
+            $table->time('jam_absen')->required();
+            $table->text('deskripsi')->nullable();
             $table->unsignedBigInteger('jadwal_id')->required();
             $table->foreign('jadwal_id')->references('id')->on('jadwal')->onDelete('restrict');
             $table->timestamps();

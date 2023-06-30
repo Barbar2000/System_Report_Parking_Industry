@@ -22,9 +22,4 @@ class Absensi extends Model
     {
         return $this->belongsTo(Jadwal::class);
     }
-
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
-    }
 }
