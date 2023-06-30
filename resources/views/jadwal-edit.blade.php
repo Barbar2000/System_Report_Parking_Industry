@@ -13,7 +13,7 @@
                     <div class="card-header">
                         <h1 style="width: 150px;"> </h1>
                     </div>
-                    <!-- /.card-header -->
+                 
 
                     <!-- form start -->
                     <form action="/jadwal-update-{{ $available_jadwal->id }}" method="POST">
