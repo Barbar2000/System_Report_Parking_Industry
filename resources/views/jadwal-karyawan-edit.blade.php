@@ -1,22 +1,17 @@
 @extends('layouts.sidebar')
 @section('title', 'Edit Jadwal Karyawan')
 @section('content')
-
     <section class="content-header">
         <div class="container-fluid">
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
     <section class="content">
         <div class="container-fluid">
             <div class="col-md-6">
-                <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
                         <h1 style="width: 150px;"> </h1>
                     </div>
-                    <!-- /.card-header -->
-
-                    <!-- form start -->
                     <form action="/jadwal-karyawan-update-{{ $jadwal->id }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -47,8 +42,6 @@
                                 </select>
                             </div>
                         </div>
-                        <!-- /.card-body -->
-
                         <div class="card-footer float-right">
                             <button type="submit" class="btn btn-success">Update Jadwal</button>
                         </div>

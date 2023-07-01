@@ -292,8 +292,8 @@
         m = m < 10 ? '0' + m : m;
         s = s < 10 ? '0' + s : s;
 
-        document.getElementById('hours').innerHTML = h + ' :' ;;
-        document.getElementById('min').innerHTML = m + ' :' ;;
+        document.getElementById('hours').innerHTML = h + ' :' ;
+        document.getElementById('min').innerHTML = m + ' :' ;
         document.getElementById('sec').innerHTML = s;
         document.getElementById('time').innerHTML = day;
         document.getElementById('' + daysofweek[daytoday] + '').style.color = "red";
@@ -302,12 +302,6 @@
         document.getElementById('year').innerHTML = year;
     }
     var inter = setInterval(jam_aktual, 400)
-</script>
-
-<script>
-    function nip_detail() {
-        document.querySelector('#nip_detail').innerHTML = document.querySelector('#nip').value
-    }
 </script>
 
 </html>

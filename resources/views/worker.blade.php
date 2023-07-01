@@ -54,7 +54,7 @@
                                     @foreach ($workerList as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td><a href="/worker-edit/{{ $data->id }}" title="Edit"
+                                            <td><a href="/worker-edit-{{ $data->id }}" title="Edit"
                                                     class="btn btn-xs btn-primary">
                                                     <ion-icon name="create-sharp"></ion-icon>
                                                 </a>

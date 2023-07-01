@@ -50,7 +50,7 @@
                                     @foreach ($deptList as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td><a href="dept-edit/{{ $data->id }}" title="Edit"
+                                            <td><a href="dept-edit-{{ $data->id }}" title="Edit"
                                                     class="btn btn-xs btn-primary">
                                                     <ion-icon name="create-sharp"></ion-icon>
                                                 </a>
@@ -122,7 +122,7 @@
                                     @foreach ($positionsList as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td><a href="positions-edit/{{ $data->id }}" title="Edit"
+                                            <td><a href="positions-edit-{{ $data->id }}" title="Edit"
                                                     class="btn btn-xs btn-primary">
                                                     <ion-icon name="create-sharp"></ion-icon>
                                                 </a>

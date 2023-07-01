@@ -1,9 +1,3 @@
-{{-- @foreach ($absensi as $item)
-    - {{ $item }} <br>
-    {{ $item->jadwal->name }}<br>
-    <br>
-    <br>
-@endforeach --}}
 @extends('layouts.sidebar')
 @section('title', 'Absensi Keluar')
 @section('content')
@@ -44,26 +38,16 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <input type="text" name="nip" class="transparant"
-                                                                    id="nip" placeholder="SCAN NIP HERE"
-                                                                    maxlength="7" minlength="7"
-                                                                    style="height: 40px; text-transform: uppercase; font-weight: bold; font-size: 20px; text-align: center;"
-                                                                    fdprocessedid="0slq2h">
+                                                                <input type="text" class="transparant" id="nip"
+                                                                    placeholder="SCAN NIP HERE" maxlength="7"
+                                                                    minlength="7"
+                                                                    style="height: 40px; text-transform: uppercase; font-weight: bold; font-size: 20px; text-align: center;">
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <br>
-                                                                <div class="alert alert-success" id="alert_sukses"
-                                                                    hidden="hidden">
-                                                                    <p id="alert_proses_sukses" style="font-size: 24px;">
-
-                                                                    </p>
-                                                                </div>
-                                                                <div class="alert alert-danger" id="alert_gagal">
-                                                                    <p id="alert_proses">
-
-                                                                    </p>
+                                                                <div>
+                                                                    <br>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -88,7 +72,6 @@
                                                                             <span id="time"></span>
                                                                         </div>
                                                                         <div id="date">
-                                                                            <span id="cal"> </span>
                                                                             <span id="day"></span>
                                                                             <span id="month"></span>
                                                                             <span id="year"></span>
@@ -102,80 +85,80 @@
                                             </div>
                                             <div class="col-sm-8 col-xs-8">
                                                 <table class="table" id="table-borderless">
-
                                                     <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <font style="font-size: 20px;">TANGGAL</font>
-                                                        </td>
-                                                        <td>:</td>
-                                                        <td style="width: 200px;">
+                                                        <tr>
+                                                            <td>
+                                                                <font style="font-size: 20px;">TANGGAL</font>
+                                                            </td>
+                                                            <td>:</td>
+                                                            <td style="width: 200px;">
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;" id="tanggal">
+                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;"
+                                                                    id="tanggal">
                                                                 </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <font style="font-size: 20px;">JAM</font>
-                                                        </td>
-                                                        <td>:</td>
-                                                        <td>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <font style="font-size: 20px;">JAM</font>
+                                                            </td>
+                                                            <td>:</td>
+                                                            <td>
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;" id="jam">
+                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;"
+                                                                    id="jam">
                                                                 </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 100px;">
-                                                            <font style="font-size: 20px;">NIP</font>
-                                                        </td>
-                                                        <td style="width: 1px;">:</td>
-                                                        <td style="width: 200px;">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 100px;">
+                                                                <font style="font-size: 20px;">NIP</font>
+                                                            </td>
+                                                            <td style="width: 1px;">:</td>
+                                                            <td style="width: 200px;">
                                                                 <span
                                                                     style="height: 30px; text-transform: uppercase;  font-size: 20px;"
                                                                     id="nip_detail">
                                                                 </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <font style="font-size: 20px;">NAMA</font>
-                                                        </td>
-                                                        <td>:</td>
-                                                        <td>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <font style="font-size: 20px;">NAMA</font>
+                                                            </td>
+                                                            <td>:</td>
+                                                            <td>
                                                                 <span
                                                                     style="height: 30px; text-transform: uppercase;  font-size: 20px;"
                                                                     id="name_detail">
                                                                 </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <font style="font-size: 20px;">DEPT </font>
-                                                        </td>
-                                                        <td>:</td>
-                                                        <td>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <font style="font-size: 20px;">DEPT </font>
+                                                            </td>
+                                                            <td>:</td>
+                                                            <td>
                                                                 <span
                                                                     style="height: 30px; text-transform: uppercase;  font-size: 20px;"
                                                                     id="dept_detail">
                                                                 </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <font style="font-size: 20px;">JADWAL </font>
-                                                        </td>
-                                                        <td>:</td>
-                                                        <td>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <font style="font-size: 20px;">JADWAL </font>
+                                                            </td>
+                                                            <td>:</td>
+                                                            <td>
                                                                 <span
                                                                     style="height: 30px; text-transform: uppercase;  font-size: 20px;"
                                                                     id="jadwal_detail">
                                                                 </span>
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                        </tr>
                                                     </tbody>
-
                                                 </table>
                                             </div>
                                         </div>
@@ -187,46 +170,43 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#nip').on('keyup', function(event) {
-
-                var nip = $(this).val();
-                console.log(nip);
-
-                totLength = nip.length;
-                if (totLength >= 7) {
-                    $.ajax({
-                        url: "{{ url('inputabsen') }}",
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        type: "post",
-                        data: {
-                            nip: nip,
-                            type: "keluar"
-                        },
-                        success: function(response) {
-                            if(response.success === false){
-                                toastr.info(response.message, 'Info !');
-                            }else{
-                                console.log(response);
-                                $('#nip_detail').text(response.data.worker.nip)
-                                $('#name_detail').text(response.data.worker.name)
-                                $('#dept_detail').text(response.data.worker.dept.name);
-                                $('#jadwal_detail').text(response.data.worker.name_jadwal);
-                                $('#tanggal').text(response.data.date);
-                                $('#jam').text(response.data.time);
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#nip').on('keyup', function(event) {
+                    var nip = $(this).val();
+                    console.log(nip);
+                    totLength = nip.length;
+                    if (totLength >= 7) {
+                        $.ajax({
+                            url: "{{ url('inputabsen') }}",
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            type: "post",
+                            data: {
+                                nip: nip,
+                                type: "keluar"
+                            },
+                            success: function(response) {
+                                if (response.success === false) {
+                                    toastr.warning(response.message, 'Gagal !');
+                                } else {
+                                    console.log(response);
+                                    $('#nip_detail').text(response.data.worker.nip)
+                                    $('#name_detail').text(response.data.worker.name)
+                                    $('#dept_detail').text(response.data.worker.dept.name);
+                                    $('#jadwal_detail').text(response.data.worker.name_jadwal);
+                                    $('#tanggal').text(response.data.date);
+                                    $('#jam').text(response.data.time);
+                                    toastr.success(response.message, 'Berhasil !');
+                                    $('#nip').val("");
+                                    document.getElementById('nip').focus();
+                                }
                             }
-                        },
-                        error: function(data) {
-                            alert("Error!! Hubungi IT");
-                        }
-                    });
-                }
+                        });
+                    }
+                });
             });
-        });
-    </script>
+        </script>
+    </section>
 @endsection

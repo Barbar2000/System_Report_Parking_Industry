@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 USE App\Models\Absensi;
 use App\Models\Jadwal;
-use App\Models\Status;
 use App\Models\Worker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -51,6 +50,44 @@ class AbsensiController extends Controller
             return response()->json(['message' => "Absen Berhasil", "success" => true, "data" => $data], 200);
         }
         // dd($data);
-         return response()->json(['message' => "Jadwal tidak sesuai", "success" => false, "data" => []], 200);
+         return response()->json(['message' => "Jadwal Karyawan Tidak Sesuai", "success" => false, "data" => []], 200);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $absensi = Absensi::with(['worker', 'jadwal.available_jadwal'])->findOrFail($id);
+        //  dd($absensi);
+        $absensi->update($request->all());
+        return view('absensi-edit', ['absensi' => $absensi]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // dd($request);
+        $absensi = Absensi::findOrFail($id);
+
+        $absensi->update($request->all());
+        if ($absensi) {
+            $notification = array
+                (
+                'message' => 'Absensi Karyawan Berhasil Diperbarui',
+                'alert-type' => 'success',
+            );
+        }
+        return redirect('absensi')->with($notification);
+    }
+
+    public function destroy($id)
+    {
+        $absensi = Absensi::findOrFail($id);
+        $absensi->delete();
+        if ($absensi) {
+            $notification = array
+                (
+                'message' => 'Data Absensi Karyawan Berhasil Dihapus',
+                'alert-type' => 'success',
+            );
+        }
+        return redirect('absensi')->with($notification);
     }
 }

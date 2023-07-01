@@ -63,12 +63,12 @@
                                     @foreach ($absensi as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td><a href="#" title="Edit" class="btn btn-xs btn-primary">
+                                            <td><a href="/absensi-karyawan-edit-{{$data->id}}" title="Edit" class="btn btn-xs btn-primary">
                                                     <ion-icon name="create-sharp"></ion-icon>
                                                 </a>
                                             </td>
                                             <td>
-                                                <form action="#">
+                                                <form action="/absensi-karyawan-destroy-{{$data->id}}">
                                                     <button class="btn btn-xs btn-danger confirm-delete" title="Delete">
                                                         <ion-icon name="trash-sharp"></ion-icon>
                                                     </button>
@@ -83,9 +83,9 @@
                                             </td>
                                             <td>
                                                 @if ($data->deskripsi == 'masuk')
-                                                    <span class="badge bg-success">{{ $data->deskripsi }}</span>
+                                                    <span class="badge bg-success" style="text-transform: uppercase;">{{ $data->deskripsi }}</span>
                                                 @else
-                                                    <span class="badge bg-danger">{{ $data->deskripsi }}</span>
+                                                    <span class="badge bg-danger" style="text-transform: uppercase;">{{ $data->deskripsi }}</span>
                                                 @endif
                                             </td>
                                             <td>{{ $data->jadwal->available_jadwal->name }}</td>

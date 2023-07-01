@@ -38,38 +38,21 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <form action="{{ url('ajaxupload') }}" method="POST"
-                                                                    id="addpost">
-                                                                    @csrf
-                                                                    <input id="nip"
-                                                                        type="text" class="transparant"
-                                                                        placeholder="SCAN NIP HERE" maxlength="7"
-                                                                        minlength="7"
-                                                                        style="height: 40px; text-transform: uppercase; font-weight: bold; font-size: 20px; text-align: center;">
-                                                                </form>
+                                                                <input id="nip" type="text" class="transparant"
+                                                                    placeholder="SCAN NIP HERE" maxlength="7"
+                                                                    minlength="7"
+                                                                    style="height: 40px; text-transform: uppercase; font-weight: bold; font-size: 20px; text-align: center;">
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <br>
-                                                                <!-- Alert -->
-                                                                <div class="alert alert-success" id="alert_sukses"
-                                                                    hidden="hidden">
-                                                                    <p id="alert_proses_sukses" style="font-size: 24px;">
-
-                                                                    </p>
+                                                                <div>
+                                                                    <br>
                                                                 </div>
-                                                                <div class="alert alert-danger" id="alert_gagal">
-                                                                    <p id="alert_proses">
-
-                                                                    </p>
-                                                                </div>
-                                                                <!-- /Alert -->
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <!-- Jam Aktual -->
                                                                 <span
                                                                     style="height: 30px; text-transform: uppercase; font-weight: bold; font-size: 20px; text-align: center;">
                                                                     <div class="jam_aktual">
@@ -95,7 +78,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </span>
-                                                                <!-- /Jam Aktual -->
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -103,7 +85,6 @@
                                             </div>
                                             <div class="col-sm-8 col-xs-8">
                                                 <table class="table" id="table-borderless">
-
                                                     <tbody>
                                                         <tr>
                                                             <td>
@@ -112,8 +93,8 @@
                                                             <td>:</td>
                                                             <td style="width: 200px;">
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;" id="tanggal">
-
+                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;"
+                                                                    id="tanggal">
                                                                 </span>
                                                             </td>
                                                         </tr>
@@ -124,7 +105,8 @@
                                                             <td>:</td>
                                                             <td>
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;" id="jam">
+                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;"
+                                                                    id="jam">
                                                                 </span>
                                                             </td>
                                                         </tr>
@@ -177,7 +159,6 @@
                                                             </td>
                                                         </tr>
                                                     </tbody>
-
                                                 </table>
                                             </div>
                                         </div>
@@ -190,13 +171,10 @@
             </div>
         </div>
         <script type="text/javascript">
-            var bulan = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
             $(document).ready(function() {
-
                 $('#nip').on('keyup', function(event) {
                     var nip = $(this).val();
                     console.log(nip);
-
                     totLength = nip.length;
                     if (totLength >= 7) {
                         $.ajax({
@@ -210,9 +188,9 @@
                                 type: "masuk"
                             },
                             success: function(response) {
-                                if(response.success === false){
-                                    toastr.info(response.message, 'Info !');
-                                }else{
+                                if (response.success === false) {
+                                    toastr.warning(response.message, 'Gagal !');
+                                } else {
                                     console.log(response);
                                     $('#nip_detail').text(response.data.worker.nip)
                                     $('#name_detail').text(response.data.worker.name)
@@ -220,10 +198,10 @@
                                     $('#jadwal_detail').text(response.data.worker.name_jadwal);
                                     $('#tanggal').text(response.data.date);
                                     $('#jam').text(response.data.time);
+                                    toastr.success(response.message, 'Berhasil !');
+                                    $('#nip').val("");
+                                    document.getElementById('nip').focus();
                                 }
-                            },
-                            error: function(data) {
-                                alert("Error!! Hubungi IT");
                             }
                         });
                     }
@@ -231,5 +209,4 @@
             });
         </script>
     </section>
-
 @endsection

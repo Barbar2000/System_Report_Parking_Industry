@@ -12,6 +12,8 @@ class Absensi extends Model
 
     protected $table = "absensi";
 
+    protected $fillable = ['_token', '_method', 'tanggal', 'jam_absen', 'deskripsi'];
+
 
     public function worker() //many to one
     {
