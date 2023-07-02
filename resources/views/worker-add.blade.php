@@ -1,35 +1,28 @@
 @extends('layouts.sidebar')
 @section('title', 'Tambah Karyawan')
 @section('content')
-
     <section class="content-header">
-        <div class="container-fluid">
-            <h3>Tambah Karyawan</h3>
-        </div><!-- /.container-fluid -->
     </section>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <!-- left column -->
                 <div class="col-md-6">
-                    <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
                             <h1> </h1>
                         </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
                         <form action="worker-add-save" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nip">NIP</label>
-                                    <input name="nip" type="text" class="form-control" id="nip" placeholder="IKD0051"
-                                        required>
+                                    <input name="nip" type="text" class="form-control" id="nip"
+                                        placeholder="IKD0051" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Nama</label>
-                                    <input name="name" type="text" class="form-control" id="name" placeholder="Nama" required>
+                                    <input name="name" type="text" class="form-control" id="name"
+                                        placeholder="Nama" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
@@ -58,8 +51,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <!-- /.card-body -->
-
                             <div class="card-footer float-right">
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
@@ -69,5 +60,4 @@
             </div>
         </div>
     </section>
-
 @endsection

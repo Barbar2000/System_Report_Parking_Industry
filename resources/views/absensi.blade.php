@@ -37,9 +37,6 @@
                                 <a href="absensi-masuk" class="btn btn-primary btn-sm">
                                     <ion-icon name="add-circle-sharp"></ion-icon> add data
                                 </a>
-                                {{-- <a href="worker-deleted" class="btn btn-dark btn-sm">
-                                    <ion-icon name="refresh-circle-sharp"></ion-icon> Restore
-                                </a> --}}
                             </div>
                         </div>
                         <!-- /.card-header -->

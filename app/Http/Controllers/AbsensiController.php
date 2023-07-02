@@ -10,9 +10,23 @@ use Illuminate\Support\Facades\DB;
 
 class AbsensiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $absensi = Absensi::with(['worker.dept'])->paginate(5);
+        $keyword  = $request->keyword;
+        $absensi = Absensi::with(['worker.dept'])
+        ->where('tanggal', 'LIKE', '%'.$keyword.'%')
+        ->orWhere('jam_absen', 'LIKE', '%'.$keyword.'%')
+        ->orWhere('deskripsi', 'LIKE', '%'.$keyword.'%')
+        ->orWhereHas('worker', function($query) use($keyword){
+            $query->where('name', 'LIKE', '%'.$keyword.'%');
+        })
+        ->orWhereHas('worker', function($query) use($keyword){
+            $query->where('nip', 'LIKE', '%'.$keyword.'%');
+        })
+        ->orWhereHas('worker.dept', function($query) use($keyword){
+            $query->where('name', 'LIKE', '%'.$keyword.'%');
+        })->paginate(5);
+
         return view('absensi', ['absensi' => $absensi]);
     }
 

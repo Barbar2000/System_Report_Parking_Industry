@@ -1,11 +1,9 @@
 @extends('layouts.sidebar')
 @section('title', 'Schedule Karyawan')
 @section('content')
-    {{-- {{$jadwal}} --}}
     <section class="content-header">
         <div class="container-fluid">
         </div>
-        <!-- /.container-fluid -->
     </section>
     <section class="content">
         <div class="container-fluid">
@@ -18,7 +16,6 @@
                                     <div class="input-group input-group-sm" style="width: 300px;">
                                         <input type="text" name="keyword" class="form-control float-right"
                                             placeholder="Search">
-
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fas fa-search"></i>
@@ -27,16 +24,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div>
-                                {{-- <a href="absensi-masuk" class="btn btn-primary btn-sm">
-                                    <ion-icon name="add-circle-sharp"></ion-icon> add data
-                                </a> --}}
-                                {{-- <a href="worker-deleted" class="btn btn-dark btn-sm">
-                                    <ion-icon name="refresh-circle-sharp"></ion-icon> Restore
-                                </a> --}}
-                            </div>
                         </div>
-                        <!-- /.card-header -->
                         <div class="card-body table-responsive" style="height: 350px;">
                             <table class="table table-bordered">
                                 <thead>
@@ -69,23 +57,19 @@
                                             <td>{{$data->worker->nip}}</td>
                                             <td>{{$data->worker->name}}</td>
                                             <td>{{$data->worker->dept->name}}</td>
-                                            <td>{{$data->tanggal_mulai}} - {{$data->tanggal_akhir}}</td>
+                                            <td>{{$data->tanggal_mulai}}  s/d  {{$data->tanggal_akhir}}</td>
                                             <td>{{$data->available_jadwal->name}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        <!-- /.card-body -->
                         <div class="card-footer clearfix">
-
-
                             <ul class="pagination pagination-sm m-2 float-right">
                                 {{$jadwal->withQueryString()->links()}}
                             </ul>
                         </div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
             </div>
         </div>
