@@ -1,6 +1,7 @@
 @extends('layouts.sidebar')
-@section('title', 'Schedule Karyawan')
+@section('title', 'Absensi Karyawan')
 @section('content')
+
     <section class="content-header">
         <div class="container-fluid">
         </div>
@@ -16,6 +17,7 @@
                                     <div class="input-group input-group-sm" style="width: 300px;">
                                         <input type="text" name="keyword" class="form-control float-right"
                                             placeholder="Search">
+
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fas fa-search"></i>
@@ -24,49 +26,35 @@
                                     </div>
                                 </form>
                             </div>
+                            <div>
+                            </div>
                         </div>
+
                         <div class="card-body table-responsive" style="height: 350px;">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">No</th>
-                                        <th style="width: 10px">Edit</th>
-                                        <th style="width: 10px">Del</th>
                                         <th style="width: 40px">NIP</th>
                                         <th>Nama</th>
                                         <th>Departemen</th>
-                                        <th>Tanggal</th>
-                                        <th>Jadwal Kerja</th>
+                                        <th>absen per periode tgl</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($jadwal as $data)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td><a href="/jadwal-karyawan-edit-{{$data->id}}" title="Edit" class="btn btn-xs btn-primary">
-                                                    <ion-icon name="create-sharp"></ion-icon>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <form action="/jadwal-karyawan-destroy-{{$data->id}}">
-                                                    <button class="btn btn-xs btn-danger confirm-delete" title="Delete">
-                                                        <ion-icon name="trash-sharp"></ion-icon>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>{{$data->worker->nip}}</td>
-                                            <td>{{$data->worker->name}}</td>
-                                            <td>{{$data->worker->dept->name}}</td>
-                                            <td>{{$data->tanggal_mulai}}  s/d  {{$data->tanggal_akhir}}</td>
-                                            <td>{{$data->available_jadwal->name}}</td>
-                                        </tr>
-                                    @endforeach
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
                         <div class="card-footer clearfix">
                             <ul class="pagination pagination-sm m-2 float-right">
-                                {{$jadwal->withQueryString()->links()}}
                             </ul>
                         </div>
                     </div>

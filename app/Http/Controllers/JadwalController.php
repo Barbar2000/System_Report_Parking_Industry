@@ -15,9 +15,23 @@ class JadwalController extends Controller
         // dd($jadwal);
     }
 
-    public function view_jadwal()
+    public function view_jadwal(Request $request)
     {
-        $jadwal = Jadwal::with(['worker.dept', 'available_jadwal'])->paginate(5);
+        $keyword  = $request->keyword;
+        $jadwal = Jadwal::with(['worker.dept', 'available_jadwal'])
+        ->WhereHas('worker', function($query) use($keyword){
+            $query->where('name', 'LIKE', '%'.$keyword.'%');
+        })
+        ->orWhereHas('worker', function($query) use($keyword){
+            $query->where('nip', 'LIKE', '%'.$keyword.'%');
+        })
+        ->orWhereHas('worker.dept', function($query) use($keyword){
+            $query->where('name', 'LIKE', '%'.$keyword.'%');
+        })
+        ->orWhereHas('available_jadwal', function($query) use($keyword){
+            $query->where('name', 'LIKE', '%'.$keyword.'%');
+        })
+        ->paginate(5);
         return view('jadwal-view', ['jadwal' => $jadwal]);
         // dd($jadwal);
     }
@@ -140,6 +154,20 @@ class JadwalController extends Controller
             $notification = array
                 (
                 'message' => 'Jadwal Karyawan Berhasil Diperbarui',
+                'alert-type' => 'success',
+            );
+        }
+        return redirect('jadwal-karyawan')->with($notification);
+    }
+
+    public function destroy_jadwal_karyawan($id)
+    {
+        $jadwal = Jadwal::findOrFail($id);
+        $jadwal->delete();
+        if ($jadwal) {
+            $notification = array
+                (
+                'message' => 'Jadwal Karyawan Berhasil Dihapus',
                 'alert-type' => 'success',
             );
         }

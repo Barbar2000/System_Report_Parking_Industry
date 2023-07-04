@@ -124,15 +124,15 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Report Absensi</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="/jadwal" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Schedule Kerja</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/report" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Report Absensi</p>
                                     </a>
                                 </li>
                             </ul>

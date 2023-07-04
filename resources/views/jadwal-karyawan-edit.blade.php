@@ -26,13 +26,20 @@
                                 <input name="" type="text" class="form-control" id=""
                                     value="{{ $jadwal->worker->name }}" readonly>
                             </div>
-                            <div class="form-group">
-                                <label for="tanggal">Tanggal</label>
-                                <input name="tanggal" type="date" class="form-control" id="tanggal"
-                                    value="{{ $jadwal->tanggal }}" required>
+                            <div class="row">
+                            <div class="form-group col-6">
+                                <label for="tanggal_mulai">Tanggal Mulai</label>
+                                <input name="tanggal_mulai" type="date" class="form-control" id="tanggal_mulai"
+                                    value="{{ $jadwal->tanggal_mulai }}" required>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="tanggal_akhir">Tanggal Akhir</label>
+                                <input name="tanggal_akhir" type="date" class="form-control" id="tanggal_akhir"
+                                    value="{{ $jadwal->tanggal_akhir }}" required>
+                            </div>
                             </div>
                             <div class="form-group">
-                                <label for="Tanggal">Tanggal</label>
+                                <label for="Tanggal">Jadwal</label>
                                 <select name="available_jadwal_id" class="custom-select rounded-0" id="available_jadwal_id" required>
                                     <option value="{{ $jadwal->available_jadwal->id }}">
                                         {{ $jadwal->available_jadwal->name }}</option>

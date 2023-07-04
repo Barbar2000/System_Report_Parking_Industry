@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 USE App\Models\Absensi;
+use App\Models\Dept;
 use App\Models\Jadwal;
 use App\Models\Worker;
 use Illuminate\Http\Request;
+use App\Models\Available_jadwal;
 use Illuminate\Support\Facades\DB;
 
 class AbsensiController extends Controller
@@ -103,5 +105,25 @@ class AbsensiController extends Controller
             );
         }
         return redirect('absensi')->with($notification);
+    }
+
+    public function index_report()
+    {
+        $available_jadwal = Available_jadwal::get();
+        $dept = Dept::select('id','name')->get();
+        // dd($worker);
+        return view('absensi-index', ['available_jadwal' => $available_jadwal, 'dept' => $dept]);
+    }
+
+    public function report(Request $request)
+    {
+        // dd($request)->all();
+        $date = date('Y-m-d');
+        $getWorker = Worker::with('dept')->select('workers.*', 'available_jadwal.name as name_jadwal', 'jadwal.id as jadwal_id')->join('jadwal', function ($query) use($date){
+            $query->on('workers.id', '=', 'jadwal.worker_id');
+            $query->where([['tanggal_mulai','<=',$date],['tanggal_akhir','>=', $date]]);
+        })->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->where('nip', '=', $request->nip)->first();
+
+        return view('absensi-report');
     }
 }

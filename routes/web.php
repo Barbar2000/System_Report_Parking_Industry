@@ -55,11 +55,11 @@ Route::get('/jadwal-edit-{id}', [JadwalController::class, 'edit']);
 Route::put('/jadwal-update-{id}', [JadwalController::class, 'update']);
 Route::get('/jadwal-destroy-{id}', [JadwalController::class, 'destroy']);
 
-
 Route::get('/jadwal-karyawan-add', [JadwalController::class, 'create_jadwal_karyawan']);
 Route::post('/jadwal-karyawan-save', [JadwalController::class, 'store_jadwal_karyawan'])->name('worker.create');
 Route::get('/jadwal-karyawan-edit-{id}', [JadwalController::class, 'edit_jadwal_karyawan']);
 Route::put('/jadwal-karyawan-update-{id}', [JadwalController::class, 'update_jadwal_karyawan']);
+Route::get('/jadwal-karyawan-destroy-{id}', [JadwalController::class, 'destroy_jadwal_karyawan']);
 
 Route::get('/absensi', [AbsensiController::class, 'index']);
 Route::get('/absensi-masuk', [AbsensiController::class, 'masuk']);
@@ -68,3 +68,6 @@ Route::post('/inputabsen', [AbsensiController::class, 'absen'])->name('inputabse
 Route::get('/absensi-karyawan-edit-{id}', [AbsensiController::class, 'edit']);
 Route::put('/absensi-karyawan-update-{id}', [AbsensiController::class, 'update']);
 Route::get('/absensi-karyawan-destroy-{id}', [AbsensiController::class, 'destroy']);
+
+Route::get('/report', [AbsensiController::class, 'index_report']);
+Route::get('/report-absensi', [AbsensiController::class, 'report']);
