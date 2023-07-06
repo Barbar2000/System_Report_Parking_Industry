@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\AbsensiController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DeptController;
 use App\Http\Controllers\JadwalController;
-use App\Http\Controllers\PositionsController;
 use App\Http\Controllers\WorkerController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\PositionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,11 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/workers', [WorkerController::class, 'index']);
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'authenticating'])->middleware('guest');
+Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::get('/workers', [WorkerController::class, 'index'])->middleware('auth');
 Route::get('/worker-add', [WorkerController::class, 'create']);
 Route::post('/worker-add-save', [WorkerController::class, 'store']);
 Route::get('/worker-edit-{id}', [WorkerController::class, 'edit']);

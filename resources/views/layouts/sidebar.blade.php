@@ -53,10 +53,25 @@
                     <a href="#" class="nav-link"></a>
                 </li>
             </ul>
-        </nav>
-        <!-- /.navbar -->
 
-        <!-- Main Sidebar Container -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button" title="Fuulscreen">
+                        <ion-icon name="scan" size="large"></ion-icon>
+                    </a>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link confirm-logout" href="/logout" role="button" title="Logout">
+                        <ion-icon name="power" size="large"></ion-icon>
+                    </a>
+
+                </li>
+                <li>
+                    <a class="nav-link"></a>
+                </li>
+            </ul>
+        </nav>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
@@ -73,7 +88,7 @@
                         <img src="lte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Admin</a>
+                        <a href="#" class="d-block">{{ Auth::user()->name }}</a>
                     </div>
                 </div>
 
@@ -186,8 +201,6 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
@@ -199,9 +212,7 @@
     <script src="{{ asset('lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('lte/dist/js/adminlte.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-{{--    <script src="{{ asset('lte/dist/js/demo.js') }}"></script>--}}
-    <!--  Ion Icon -->
+
     <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
     <!-- Toastr -->
     <script src="{{ asset('lte/plugins/toastr/toastr.min.js') }}"></script>
@@ -271,9 +282,25 @@
                 }
             });
     });
+
+    // $('.confirm-logout').click(function(event) {
+    //     var form = $(this).closest('button')
+    //     event.preventDefault();
+    //     swal({
+    //             title: `Apakah anda yakin ingin logout ?`,
+    //             icon: "warning",
+    //             buttons: true,
+    //             dangerMode: true,
+    //         })
+    //         .then((willRestore) => {
+    //             if (willRestore) {
+    //                 form.click();
+    //             }
+    //         });
+    });
 </script>
 
- <script>
+<script>
     var daysofweek = ['sun', 'mon', 'tus', 'wed', 'thu', 'fri', 'sat'];
     var month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
@@ -292,8 +319,8 @@
         m = m < 10 ? '0' + m : m;
         s = s < 10 ? '0' + s : s;
 
-        document.getElementById('hours').innerHTML = h + ' :' ;
-        document.getElementById('min').innerHTML = m + ' :' ;
+        document.getElementById('hours').innerHTML = h + ' :';
+        document.getElementById('min').innerHTML = m + ' :';
         document.getElementById('sec').innerHTML = s;
         document.getElementById('time').innerHTML = day;
         document.getElementById('' + daysofweek[daytoday] + '').style.color = "red";
