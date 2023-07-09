@@ -12,12 +12,21 @@
                     <div class="card">
                         <div class="card-header">
                             <div>
-                                <a href="dept-add" class="btn btn-primary btn-sm">
-                                    <ion-icon name="add-circle-sharp"></ion-icon> add data
-                                </a>
-                                <a href="dept-deleted" class="btn btn-dark btn-sm">
-                                    <ion-icon name="refresh-circle-sharp"></ion-icon> Restore
-                                </a>
+                                @if (Auth::user()->id != 1)
+                                    <a href="dept-add" class="btn btn-primary btn-sm disabled">
+                                        <ion-icon name="add-circle-sharp"></ion-icon> add data
+                                    </a>
+                                    <a href="dept-deleted" class="btn btn-dark btn-sm disabled">
+                                        <ion-icon name="refresh-circle-sharp"></ion-icon> Restore
+                                    </a>
+                                @else
+                                    <a href="dept-add" class="btn btn-primary btn-sm">
+                                        <ion-icon name="add-circle-sharp"></ion-icon> add data
+                                    </a>
+                                    <a href="dept-deleted" class="btn btn-dark btn-sm">
+                                        <ion-icon name="refresh-circle-sharp"></ion-icon> Restore
+                                    </a>
+                                @endif
                             </div>
                         </div>
                         <div class="card-body table-responsive" style="height: 350px;">
@@ -35,18 +44,34 @@
                                     @foreach ($deptList as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td><a href="dept-edit-{{ $data->id }}" title="Edit"
-                                                    class="btn btn-xs btn-primary">
-                                                    <ion-icon name="create-sharp"></ion-icon>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <form action="/dept-destroy/{{ $data->id }}">
-                                                    <button class="btn btn-xs btn-danger confirm-delete" title="Delete">
-                                                        <ion-icon name="trash-sharp"></ion-icon>
-                                                    </button>
-                                                </form>
-                                            </td>
+                                            @if (Auth::user()->id != 1)
+                                                <td><a href="dept-edit-{{ $data->id }}" title="Edit"
+                                                        class="btn btn-xs btn-primary disabled">
+                                                        <ion-icon name="create-sharp"></ion-icon>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form action="/dept-destroy/{{ $data->id }}">
+                                                        <button class="btn btn-xs btn-danger confirm-delete disabled"
+                                                            title="Delete">
+                                                            <ion-icon name="trash-sharp"></ion-icon>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @else
+                                                <td><a href="dept-edit-{{ $data->id }}" title="Edit"
+                                                        class="btn btn-xs btn-primary">
+                                                        <ion-icon name="create-sharp"></ion-icon>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form action="/dept-destroy/{{ $data->id }}">
+                                                        <button class="btn btn-xs btn-danger confirm-delete" title="Delete">
+                                                            <ion-icon name="trash-sharp"></ion-icon>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @endif
                                             <td>{{ $data->name }}</td>
                                             <td>
                                                 @foreach ($data->workers as $workers)
@@ -69,9 +94,15 @@
                     <div class="card">
                         <div class="card-header">
                             <div>
-                                <a href="positions-add" class="btn btn-primary btn-sm">
-                                    <ion-icon name="add-circle-sharp"></ion-icon> add data
-                                </a>
+                                @if (Auth::user()->id != 1)
+                                    <a href="positions-add" class="btn btn-primary btn-sm disabled">
+                                        <ion-icon name="add-circle-sharp"></ion-icon> add data
+                                    </a>
+                                @else
+                                    <a href="positions-add" class="btn btn-primary btn-sm">
+                                        <ion-icon name="add-circle-sharp"></ion-icon> add data
+                                    </a>
+                                @endif
                             </div>
                         </div>
                         <div class="card-body table-responsive" style="height: 350px;">
@@ -89,18 +120,33 @@
                                     @foreach ($positionsList as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td><a href="positions-edit-{{ $data->id }}" title="Edit"
-                                                    class="btn btn-xs btn-primary">
-                                                    <ion-icon name="create-sharp"></ion-icon>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <form action="/positions-destroy/{{ $data->id }}">
-                                                    <button class="btn btn-xs btn-danger confirm-delete" title="Delete">
-                                                        <ion-icon name="trash-sharp"></ion-icon>
-                                                    </button>
-                                                </form>
-                                            </td>
+                                            @if (Auth::user()->id != 1)
+                                                <td><a href="positions-edit-{{ $data->id }}" title="Edit"
+                                                        class="btn btn-xs btn-primary disabled">
+                                                        <ion-icon name="create-sharp"></ion-icon>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form action="/positions-destroy/{{ $data->id }}">
+                                                        <button class="btn btn-xs btn-danger confirm-delete disabled" title="Delete">
+                                                            <ion-icon name="trash-sharp"></ion-icon>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @else
+                                                <td><a href="positions-edit-{{ $data->id }}" title="Edit"
+                                                        class="btn btn-xs btn-primary">
+                                                        <ion-icon name="create-sharp"></ion-icon>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form action="/positions-destroy/{{ $data->id }}">
+                                                        <button class="btn btn-xs btn-danger confirm-delete" title="Delete">
+                                                            <ion-icon name="trash-sharp"></ion-icon>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @endif
                                             <td>{{ $data->name }}</td>
                                             <td>
                                                 @foreach ($data->workers as $workers)

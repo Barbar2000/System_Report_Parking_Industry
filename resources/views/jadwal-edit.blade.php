@@ -13,13 +13,11 @@
                     <div class="card-header">
                         <h1 style="width: 150px;"> </h1>
                     </div>
-                 
-
                     <!-- form start -->
                     <form action="/jadwal-update-{{ $available_jadwal->id }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="card-body" style="height: 400px;">
+                        <div class="card-body" style="height: 350px;">
                             <div class="form-group">
                                 <label for="name">Ubah Nama Jadwal</label>
                                 <input name="name" type="text" class="form-control" id="name"
@@ -36,8 +34,7 @@
                                     value="{{ $available_jadwal->jam_selesai }}">
                             </div>
                         </div>
-                        <!-- /.card-body -->
-
+                         <!-- /.card-body -->
                         <div class="card-footer float-right">
                             <button type="submit" class="btn btn-success">Update Jadwal</button>
                         </div>

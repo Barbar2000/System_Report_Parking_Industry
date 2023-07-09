@@ -27,12 +27,22 @@
                                 </form>
                             </div>
                             <div>
+                                @if (Auth::user()->id !=1)
+                                <a href="worker-add" class="btn btn-primary btn-sm disabled">
+                                    <ion-icon name="add-circle-sharp"></ion-icon> add data
+                                </a>
+                                <a href="worker-deleted" class="btn btn-dark btn-sm disabled">
+                                    <ion-icon name="refresh-circle-sharp"></ion-icon> Restore
+                                </a>
+                                @else
                                 <a href="worker-add" class="btn btn-primary btn-sm">
                                     <ion-icon name="add-circle-sharp"></ion-icon> add data
                                 </a>
                                 <a href="worker-deleted" class="btn btn-dark btn-sm">
                                     <ion-icon name="refresh-circle-sharp"></ion-icon> Restore
                                 </a>
+                                @endif
+
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -54,6 +64,20 @@
                                     @foreach ($workerList as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            @if (Auth::user()->id !=1)
+                                            <td><a href="#" title="Edit"
+                                                class="btn btn-xs btn-primary disabled">
+                                                <ion-icon name="create-sharp"></ion-icon>
+                                            </a>
+                                            </td>
+                                            <td>
+                                                <form action="">
+                                                    <button class="btn btn-xs btn-danger confirm-delete disabled" title="Delete">
+                                                        <ion-icon name="trash-sharp"></ion-icon>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            @else
                                             <td><a href="/worker-edit-{{ $data->id }}" title="Edit"
                                                     class="btn btn-xs btn-primary">
                                                     <ion-icon name="create-sharp"></ion-icon>
@@ -66,6 +90,7 @@
                                                     </button>
                                                 </form>
                                             </td>
+                                            @endif
                                             <td>{{ $data->nip }}</td>
                                             <td>{{ $data->name }}</td>
                                             <td>

@@ -43,22 +43,38 @@
                                     @foreach ($jadwal as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td><a href="/jadwal-karyawan-edit-{{$data->id}}" title="Edit" class="btn btn-xs btn-primary">
-                                                    <ion-icon name="create-sharp"></ion-icon>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <form action="/jadwal-karyawan-destroy-{{$data->id}}">
-                                                    <button class="btn btn-xs btn-danger confirm-delete" title="Delete">
-                                                        <ion-icon name="trash-sharp"></ion-icon>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>{{$data->worker->nip}}</td>
-                                            <td>{{$data->worker->name}}</td>
-                                            <td>{{$data->worker->dept->name}}</td>
-                                            <td>{{$data->tanggal_mulai}}  s/d  {{$data->tanggal_akhir}}</td>
-                                            <td>{{$data->available_jadwal->name}}</td>
+                                            @if (Auth::user()->id != 1)
+                                                <td><a href="/jadwal-karyawan-edit-{{ $data->id }}" title="Edit"
+                                                        class="btn btn-xs btn-primary disabled">
+                                                        <ion-icon name="create-sharp"></ion-icon>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form action="/jadwal-karyawan-destroy-{{ $data->id }}">
+                                                        <button class="btn btn-xs btn-danger confirm-delete disabled" title="Delete">
+                                                            <ion-icon name="trash-sharp"></ion-icon>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @else
+                                                <td><a href="/jadwal-karyawan-edit-{{ $data->id }}" title="Edit"
+                                                        class="btn btn-xs btn-primary">
+                                                        <ion-icon name="create-sharp"></ion-icon>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form action="/jadwal-karyawan-destroy-{{ $data->id }}">
+                                                        <button class="btn btn-xs btn-danger confirm-delete" title="Delete">
+                                                            <ion-icon name="trash-sharp"></ion-icon>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @endif
+                                            <td>{{ $data->worker->nip }}</td>
+                                            <td>{{ $data->worker->name }}</td>
+                                            <td>{{ $data->worker->dept->name }}</td>
+                                            <td>{{ $data->tanggal_mulai }} s/d {{ $data->tanggal_akhir }}</td>
+                                            <td>{{ $data->available_jadwal->name }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -66,7 +82,7 @@
                         </div>
                         <div class="card-footer clearfix">
                             <ul class="pagination pagination-sm m-2 float-right">
-                                {{$jadwal->withQueryString()->links()}}
+                                {{ $jadwal->withQueryString()->links() }}
                             </ul>
                         </div>
                     </div>

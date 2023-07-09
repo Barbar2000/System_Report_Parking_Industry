@@ -32,23 +32,25 @@
                                         <option value="P">Perempuan</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="dept">Departemen</label>
-                                    <select name="dept_id" class="custom-select rounded-0" id="dept" required>
-                                        <option value="">Pilih Salah Satu</option>
-                                        @foreach ($dept as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="positions">Jabatan</label>
-                                    <select name="positions_id" class="custom-select rounded-0" id="positions" required>
-                                        <option value="">Pilih Salah Satu</option>
-                                        @foreach ($positions as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="dept">Departemen</label>
+                                        <select name="dept_id" class="custom-select rounded-0" id="dept" required>
+                                            <option value="">Pilih Salah Satu</option>
+                                            @foreach ($dept as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="positions">Jabatan</label>
+                                        <select name="positions_id" class="custom-select rounded-0" id="positions" required>
+                                            <option value="">Pilih Salah Satu</option>
+                                            @foreach ($positions as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer float-right">

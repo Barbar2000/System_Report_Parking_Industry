@@ -15,7 +15,7 @@
                             <div class="card-header">
                                 <div class="card-tools">
                                     <form action="" method="get">
-                                        <div class="input-group" style="width: 300px;">
+                                        <div class="input-group" style="width: 200px;">
                                             <input type="text" name="keyword" class="form-control float-right"
                                                 placeholder="Search">
 
@@ -30,7 +30,7 @@
                                 <form action="jadwal-karyawan-save" method="POST" name="form_jadwal" id="form_jadwal">
                                     @csrf
                                     <div class="row">
-                                        <div class="input-group col-3">
+                                        <div class="input-group col-4">
 
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Tanggal Mulai</span>
@@ -38,7 +38,7 @@
                                             <input name="tanggal_mulai" id="tanggal_mulai" type="date" class="form-control"
                                                 required>
                                         </div>
-                                        <div class="input-group col-3">
+                                        <div class="input-group col-4">
 
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Tanggal Akhir</span>
@@ -46,7 +46,7 @@
                                             <input name="tanggal_akhir" id="tanggal_akhir" type="date" class="form-control"
                                                    required>
                                         </div>
-                                        <div class="input-group col-4">
+                                        <div class="input-group col-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Jadwal</span>
                                             </div>

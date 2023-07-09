@@ -14,6 +14,7 @@ class AuthController extends Controller
     {
         $user = User::get();
         return view('layouts\login', ['user' => $user]);
+
     }
 
     public function authenticating(Request $request)
@@ -22,6 +23,7 @@ class AuthController extends Controller
             'name' => ['required'],
             'password' => ['required'],
         ]);
+
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();

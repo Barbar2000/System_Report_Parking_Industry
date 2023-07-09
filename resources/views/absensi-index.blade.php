@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card-body table-responsive" style="height: 370px;">
+                                <div class="card-body table-responsive" style="height: 350px;">
                                     <div class="input-group col-12">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" style="width: 110px">NIP </span>
@@ -76,9 +76,10 @@
                                         </select>
                                     </div>
                                     <br>
-                                    <div class="card-footer float-right">
-                                        <button type="submit" class="btn btn-success" style="width: 100px">View</button>
-                                    </div>
+
+                                </div>
+                                <div class="card-footer float-right">
+                                    <button type="submit" class="btn btn-success btn-sm" style="width: 100px">View</button>
                                 </div>
                             </form>
                         </div>

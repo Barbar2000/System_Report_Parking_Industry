@@ -31,7 +31,7 @@
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="lte/index2.html" class="h1"><b>Wel</b>Come</a>
+                <a class="h1"><b>Wel</b>Come</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
@@ -45,13 +45,13 @@
                         </select>
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="fas fa-user"></span>
                             </div>
                         </div>
                     </div>
                     <div class="input-group mb-3">
                         <input name="password" id="password" type="password" class="form-control"
-                            placeholder="Password">
+                            placeholder="Password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -60,13 +60,11 @@
                     </div>
                     <div class="float-right">
                         <div>
-                            <button type="submit" class="btn btn-primary btn-block ">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-sm">Sign In</button>
                         </div>
                     </div>
                 </form>
-                <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
-                </p>
+
             </div>
         </div>
     </div>

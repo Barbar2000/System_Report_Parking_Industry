@@ -83,7 +83,9 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <div class="col-sm-8 col-xs-8">
+                                            <div class="col-sm-1 col-xs-1">
+                                            </div>
+                                            <div class="col-sm-6 col-xs-6">
                                                 <table class="table" id="table-borderless">
                                                     <tbody>
                                                         <tr>
@@ -190,6 +192,8 @@
                             success: function(response) {
                                 if (response.success === false) {
                                     toastr.warning(response.message, 'Gagal !');
+                                    $('#nip').val("");
+                                    document.getElementById('nip').focus();
                                 } else {
                                     console.log(response);
                                     $('#nip_detail').text(response.data.worker.nip)

@@ -15,7 +15,7 @@
                     <form action="/jadwal-karyawan-update-{{ $jadwal->id }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="card-body" style="height: 400px;">
+                        <div class="card-body" style="height: 350px;">
                             <div class="form-group">
                                 <label for="nip">NIP</label>
                                 <input name="" type="text" class="form-control" id=""
@@ -27,26 +27,27 @@
                                     value="{{ $jadwal->worker->name }}" readonly>
                             </div>
                             <div class="row">
-                            <div class="form-group col-6">
-                                <label for="tanggal_mulai">Tanggal Mulai</label>
-                                <input name="tanggal_mulai" type="date" class="form-control" id="tanggal_mulai"
-                                    value="{{ $jadwal->tanggal_mulai }}" required>
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="tanggal_akhir">Tanggal Akhir</label>
-                                <input name="tanggal_akhir" type="date" class="form-control" id="tanggal_akhir"
-                                    value="{{ $jadwal->tanggal_akhir }}" required>
-                            </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Tanggal">Jadwal</label>
-                                <select name="available_jadwal_id" class="custom-select rounded-0" id="available_jadwal_id" required>
-                                    <option value="{{ $jadwal->available_jadwal->id }}">
-                                        {{ $jadwal->available_jadwal->name }}</option>
-                                    @foreach ($available_jadwal as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="form-group col-4">
+                                    <label for="tanggal_mulai">Tanggal Mulai</label>
+                                    <input name="tanggal_mulai" type="date" class="form-control" id="tanggal_mulai"
+                                        value="{{ $jadwal->tanggal_mulai }}" required>
+                                </div>
+                                <div class="form-group col-4">
+                                    <label for="tanggal_akhir">Tanggal Akhir</label>
+                                    <input name="tanggal_akhir" type="date" class="form-control" id="tanggal_akhir"
+                                        value="{{ $jadwal->tanggal_akhir }}" required>
+                                </div>
+                                <div class="form-group col-4">
+                                    <label for="Tanggal">Jadwal</label>
+                                    <select name="available_jadwal_id" class="custom-select rounded-0"
+                                        id="available_jadwal_id" required>
+                                        <option value="{{ $jadwal->available_jadwal->id }}">
+                                            {{ $jadwal->available_jadwal->name }}</option>
+                                        @foreach ($available_jadwal as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer float-right">
@@ -57,5 +58,4 @@
             </div>
         </div>
     </section>
-
 @endsection

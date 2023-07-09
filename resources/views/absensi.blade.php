@@ -34,9 +34,15 @@
                                 </form>
                             </div>
                             <div>
-                                <a href="absensi-masuk" class="btn btn-primary btn-sm">
-                                    <ion-icon name="add-circle-sharp"></ion-icon> add data
-                                </a>
+                                @if (Auth::user()->id != 1)
+                                    <a href="absensi-masuk" class="btn btn-primary btn-sm disabled">
+                                        <ion-icon name="add-circle-sharp"></ion-icon> add data
+                                    </a>
+                                @else
+                                    <a href="absensi-masuk" class="btn btn-primary btn-sm">
+                                        <ion-icon name="add-circle-sharp"></ion-icon> add data
+                                    </a>
+                                @endif
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -60,29 +66,47 @@
                                     @foreach ($absensi as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td><a href="/absensi-karyawan-edit-{{$data->id}}" title="Edit" class="btn btn-xs btn-primary">
-                                                    <ion-icon name="create-sharp"></ion-icon>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <form action="/absensi-karyawan-destroy-{{$data->id}}">
-                                                    <button class="btn btn-xs btn-danger confirm-delete" title="Delete">
-                                                        <ion-icon name="trash-sharp"></ion-icon>
-                                                    </button>
-                                                </form>
-                                            </td>
+                                            @if (Auth::user()->id != 1)
+                                                <td><a href="/absensi-karyawan-edit-{{ $data->id }}" title="Edit"
+                                                        class="btn btn-xs btn-primary disabled">
+                                                        <ion-icon name="create-sharp"></ion-icon>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form action="/absensi-karyawan-destroy-{{ $data->id }}">
+                                                        <button class="btn btn-xs btn-danger confirm-delete disabled" title="Delete">
+                                                            <ion-icon name="trash-sharp"></ion-icon>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @else
+                                                <td><a href="/absensi-karyawan-edit-{{ $data->id }}" title="Edit"
+                                                        class="btn btn-xs btn-primary">
+                                                        <ion-icon name="create-sharp"></ion-icon>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form action="/absensi-karyawan-destroy-{{ $data->id }}">
+                                                        <button class="btn btn-xs btn-danger confirm-delete" title="Delete">
+                                                            <ion-icon name="trash-sharp"></ion-icon>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @endif
                                             <td>{{ $data->worker->nip }}</td>
                                             <td>{{ $data->worker->name }}</td>
                                             <td>{{ $data->worker->dept->name }}</td>
                                             <td>{{ $data->tanggal }}</td>
                                             <td>
-                                                {{$data->jam_absen}}
+                                                {{ $data->jam_absen }}
                                             </td>
                                             <td>
                                                 @if ($data->deskripsi == 'masuk')
-                                                    <span class="badge bg-success" style="text-transform: uppercase;">{{ $data->deskripsi }}</span>
+                                                    <span class="badge bg-success"
+                                                        style="text-transform: uppercase;">{{ $data->deskripsi }}</span>
                                                 @else
-                                                    <span class="badge bg-danger" style="text-transform: uppercase;">{{ $data->deskripsi }}</span>
+                                                    <span class="badge bg-danger"
+                                                        style="text-transform: uppercase;">{{ $data->deskripsi }}</span>
                                                 @endif
                                             </td>
                                             <td>{{ $data->jadwal->available_jadwal->name }}</td>
@@ -96,7 +120,7 @@
 
 
                             <ul class="pagination pagination-sm m-2 float-right">
-                                {{$absensi->withQueryString()->links()}}
+                                {{ $absensi->withQueryString()->links() }}
                             </ul>
                         </div>
                     </div>
