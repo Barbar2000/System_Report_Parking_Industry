@@ -1,8 +1,9 @@
 @extends('layouts.sidebar')
 @section('title', 'Absensi Karyawan')
 @section('content')
+{{-- {{$hasil}} --}}
 
-    <section class="content-header">
+<section class="content-header">
         <div class="container-fluid">
         </div>
     </section>

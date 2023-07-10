@@ -1,5 +1,5 @@
 {{-- @foreach ($absensi as $item)
-    - {{ $item }} <br>
+    <br>
     {{ $item->jadwal->available_jadwal->name }}<br>
     <br>
     <br>

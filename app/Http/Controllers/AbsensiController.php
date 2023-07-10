@@ -2,56 +2,58 @@
 
 namespace App\Http\Controllers;
 
-USE App\Models\Absensi;
+use App\Models\Absensi;
+use App\Models\Available_jadwal;
 use App\Models\Dept;
-use App\Models\Jadwal;
 use App\Models\Worker;
 use Illuminate\Http\Request;
-use App\Models\Available_jadwal;
-use Illuminate\Support\Facades\DB;
 
 class AbsensiController extends Controller
 {
     public function index(Request $request)
     {
-        $keyword  = $request->keyword;
-        $absensi = Absensi::with(['worker.dept'])
-        ->where('tanggal', 'LIKE', '%'.$keyword.'%')
-        ->orWhere('jam_absen', 'LIKE', '%'.$keyword.'%')
-        ->orWhere('deskripsi', 'LIKE', '%'.$keyword.'%')
-        ->orWhereHas('worker', function($query) use($keyword){
-            $query->where('name', 'LIKE', '%'.$keyword.'%');
-        })
-        ->orWhereHas('worker', function($query) use($keyword){
-            $query->where('nip', 'LIKE', '%'.$keyword.'%');
-        })
-        ->orWhereHas('worker.dept', function($query) use($keyword){
-            $query->where('name', 'LIKE', '%'.$keyword.'%');
-        })->paginate(5);
+        $keyword = $request->keyword;
+        $absensi = Absensi::with(['worker.dept', 'jadwal.available_jadwal'])
+            ->where('tanggal', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('jam_absen', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('deskripsi', 'LIKE', '%' . $keyword . '%')
+            ->orWhereHas('worker', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', '%' . $keyword . '%');
+            })
+            ->orWhereHas('worker', function ($query) use ($keyword) {
+                $query->where('nip', 'LIKE', '%' . $keyword . '%');
+            })
+            ->orWhereHas('worker.dept', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', '%' . $keyword . '%');
+            })
+            ->orWhereHas('jadwal.available_jadwal', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', '%' . $keyword . '%');
+            })
+            ->paginate(5);
 
         return view('absensi', ['absensi' => $absensi]);
     }
 
     public function masuk()
     {
-        $absensi =Absensi::with(['worker.dept'])->get();
+        $absensi = Absensi::with(['worker.dept'])->get();
         return view('absensi-masuk', ['absensi' => $absensi]);
     }
 
     public function keluar()
     {
-        $absensi =Absensi::with(['worker.dept'])->get();
+        $absensi = Absensi::with(['worker.dept'])->get();
         return view('absensi-keluar', ['absensi' => $absensi]);
     }
 
     public function absen(Request $request)
     {
         $date = date('Y-m-d');
-        $getWorker = Worker::with('dept')->select('workers.*', 'available_jadwal.name as name_jadwal', 'jadwal.id as jadwal_id')->join('jadwal', function ($query) use($date){
+        $getWorker = Worker::with('dept')->select('workers.*', 'available_jadwal.name as name_jadwal', 'jadwal.id as jadwal_id')->join('jadwal', function ($query) use ($date) {
             $query->on('workers.id', '=', 'jadwal.worker_id');
-            $query->where([['tanggal_mulai','<=',$date],['tanggal_akhir','>=', $date]]);
+            $query->where([['tanggal_mulai', '<=', $date], ['tanggal_akhir', '>=', $date]]);
         })->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->where('nip', '=', $request->nip)->first();
-        if(!is_null($getWorker)){
+        if (!is_null($getWorker)) {
             $time = date('H:i:s');
             $absensi = new Absensi();
             $absensi->worker_id = $getWorker->id;
@@ -66,7 +68,7 @@ class AbsensiController extends Controller
             return response()->json(['message' => "Absen Berhasil", "success" => true, "data" => $data], 200);
         }
         // dd($data);
-         return response()->json(['message' => "Jadwal Karyawan Tidak Sesuai", "success" => false, "data" => []], 200);
+        return response()->json(['message' => "Jadwal Karyawan Tidak Sesuai", "success" => false, "data" => []], 200);
     }
 
     public function edit(Request $request, $id)
@@ -110,7 +112,7 @@ class AbsensiController extends Controller
     public function index_report()
     {
         $available_jadwal = Available_jadwal::get();
-        $dept = Dept::select('id','name')->get();
+        $dept = Dept::select('id', 'name')->get();
         // dd($worker);
         return view('absensi-index', ['available_jadwal' => $available_jadwal, 'dept' => $dept]);
     }
@@ -118,12 +120,9 @@ class AbsensiController extends Controller
     public function report(Request $request)
     {
         // dd($request)->all();
-        $date = date('Y-m-d');
-        $getWorker = Worker::with('dept')->select('workers.*', 'available_jadwal.name as name_jadwal', 'jadwal.id as jadwal_id')->join('jadwal', function ($query) use($date){
-            $query->on('workers.id', '=', 'jadwal.worker_id');
-            $query->where([['tanggal_mulai','<=',$date],['tanggal_akhir','>=', $date]]);
-        })->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->where('nip', '=', $request->nip)->first();
-
+        // $awal = $request->tanggal_mulai;
+        // $akhir = $request->tanggal_akhir;
+        // $hasil = Absensi::where(['tanggal_mulai', '<=', $awal], ['tanggal_akhir', '>=', $akhir]);
         return view('absensi-report');
     }
 }

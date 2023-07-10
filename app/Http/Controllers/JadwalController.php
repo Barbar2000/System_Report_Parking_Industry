@@ -19,7 +19,9 @@ class JadwalController extends Controller
     {
         $keyword  = $request->keyword;
         $jadwal = Jadwal::with(['worker.dept', 'available_jadwal'])
-        ->WhereHas('worker', function($query) use($keyword){
+        ->where('tanggal_mulai', 'LIKE', '%' . $keyword . '%')
+        ->orwhere('tanggal_akhir', 'LIKE', '%' . $keyword . '%')
+        ->orWhereHas('worker', function($query) use($keyword){
             $query->where('name', 'LIKE', '%'.$keyword.'%');
         })
         ->orWhereHas('worker', function($query) use($keyword){
