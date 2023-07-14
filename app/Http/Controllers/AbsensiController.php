@@ -132,31 +132,19 @@ class AbsensiController extends Controller
             new \DateInterval('P1D'),
             new \DateTime($dateEnd)
         );
-//        dd($dateRange);
         $workers = Worker::with('dept')->select('workers.*')->get();
-
-        $absensi = array();
         $jadwal = array();
 
         foreach ($workers as $worker){
-//            $absensi[$worker->id] = Absensi::query()->where('worker_id', '=', $worker->id)->whereBetween('tanggal', [$dateStart, $dateEnd])->get()->toArray();
-//            $jadwal[$worker->id] = Jadwal::query()->where('jadwal.worker_id', '=', $worker->id)->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->leftJoin('absensi', function ($query) use( $dateStart, $dateEnd){
-//                $query->on('jadwal.id', '=', 'absensi.jadwal_id');
-//                $query->whereBetween('tanggal', [$dateStart, $dateEnd]);
-//            })->get()->toArray();
             $merge = [];
             $jadwal[$worker->id] = Jadwal::query()->select('jadwal.*', 'available_jadwal.name')->where([['tanggal_akhir', '>=', $dateStart], ['tanggal_mulai', '<=', $dateEnd]])->where('jadwal.worker_id', '=', $worker->id)->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->get()->toArray();
             foreach ($jadwal[$worker->id] as $data){
                 $absen  = Absensi::query()->where('jadwal_id', '=', $data['id'])->where('worker_id', '=', $worker->id)->get()->toArray();
+                $data['absen'] = $absen;
+                $merge[] = $data;
             }
-//            $jadwal[$worker->id]['absen'] = $absen;
-//            dd($absen);
+            $jadwal[$worker->id] = $merge;
         }
-        dd($jadwal);
-//        $getWorker = Worker::with('dept')->select('workers.*', 'available_jadwal.name as name_jadwal', 'jadwal.id as jadwal_id')->join('jadwal', function ($query) use($date){
-//            $query->on('workers.id', '=', 'jadwal.worker_id');
-//            $query->where([['tanggal_mulai','<=',$date],['tanggal_akhir','>=', $date]]);
-//        })->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->where('nip', '=', $request->nip)->first();
         $data = [
             'dateRange' => $dateRange,
             'workers' => $workers,

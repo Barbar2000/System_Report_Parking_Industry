@@ -55,19 +55,36 @@
                                         <td>{{$worker->dept->name}}</td>
                                         @foreach($dateRange as $value)
                                            @if(count($jadwal[$worker->id]) > 0)
-{{--                                               @foreach($jadwal[$worker->id] as $absen)--}}
-                                                <?php
-                                                    $absens = collect($jadwal[$worker->id])->where('tanggal_mulai', '=', $value->format('Y-m-d'))->orWhere('tanggal_akhir', '=', $value->format('Y-m-d'));
-                                                    ?>
-                                                   @if(!is_null($absens))
-                                                   <td>
-                                                       @foreach($absens as $absen)
-                                                           {{ $absen['deskripsi'] == 'masuk' ? $absen['jam_absen'] : $absen['jam_absen'] }}
-                                                       @endforeach
-                                                   </td>
-                                                   @else
-                                                    @endif
-{{--                                               @endforeach--}}
+                                               <td>
+                                                   <?php
+                                                   $getJadwal = collect($jadwal[$worker->id])->where('tanggal_mulai', '<=', $value->format('Y-m-d'))->where('tanggal_akhir', '>=', $value->format('Y-m-d'))->first();
+                                                   ?>
+                                                   @if(!is_null($getJadwal))
+                                                       <p>{{$getJadwal['name']}}</p>
+                                                       @if(strtolower($getJadwal['name']) != 'libur')
+                                                           @if(count($getJadwal['absen']) > 0)
+                                                               @if(strtolower($getJadwal['name']) == 'shift 3')
+                                                                       <?php
+                                                                       $dataMasuk = collect($getJadwal['absen'])->where('deskripsi', '=', 'masuk')->where('tanggal', '=', $value->format('Y-m-d'))->first();
+                                                                       $dataKeluar = collect($getJadwal['absen'])->where('deskripsi', '=', 'keluar')->where('tanggal', '=', $value->modify('+1 day')->format('Y-m-d'))->first();
+
+                                                                       ?>
+                                                                       <p>{{$dataMasuk['deskripsi'].' : '.$dataMasuk['jam_absen']}}</p>
+                                                                        <p>{{$dataKeluar['deskripsi'].' : '.$dataKeluar['jam_absen']}}</p>
+                                                               @else
+                                                                   <?php
+                                                                       $dataAbsen = collect($getJadwal['absen'])->where('tanggal', '=', $value->format('Y-m-d'));
+                                                                       ?>
+                                                                   @foreach($dataAbsen as $data)
+                                                                       <p>{{$data['deskripsi'].' : '.$data['jam_absen']}}</p>
+                                                                   @endforeach
+                                                               @endif
+                                                           @else
+                                                               Absen
+                                                           @endif
+                                                       @endif
+                                                   @endif
+                                               </td>
                                            @endif
                                         @endforeach
                                     </tr>
