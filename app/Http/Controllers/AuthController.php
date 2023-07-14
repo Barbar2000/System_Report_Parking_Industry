@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function login()
     {
         $user = User::get();
-        return view('layouts\login', ['user' => $user]);
+        return view('layouts.login', ['user' => $user]);
 
     }
 

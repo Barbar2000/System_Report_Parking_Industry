@@ -192,7 +192,7 @@
                             success: function(response) {
                                 if (response.success === false) {
                                     toastr.warning(response.message, 'Gagal !');
-                                    $('#nip').val("");
+                                    // $('#nip').val("");
                                     document.getElementById('nip').focus();
                                 } else {
                                     console.log(response);
@@ -211,6 +211,16 @@
                     }
                 });
             });
+        </script>
+        @vite(['resources/js/app.js'])
+        <script type="module">
+            window.onload=function() {
+                Echo.channel('input-nip')
+                    .listen('InputNipEvent', (e) => {
+                        $('#nip').val(e.nip);
+                        $('#nip').keyup();
+                    })
+            }
         </script>
     </section>
 @endsection

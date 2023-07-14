@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\InputNipEvent;
 use App\Models\Absensi;
 use App\Models\Available_jadwal;
 use App\Models\Dept;
+use App\Models\Jadwal;
 use App\Models\Worker;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Zxing\QrReader;
 
 class AbsensiController extends Controller
 {
@@ -68,7 +73,7 @@ class AbsensiController extends Controller
             return response()->json(['message' => "Absen Berhasil", "success" => true, "data" => $data], 200);
         }
         // dd($data);
-        return response()->json(['message' => "Jadwal Karyawan Tidak Sesuai", "success" => false, "data" => []], 200);
+         return response()->json(['message' => "Jadwal Karyawan Tidak Sesuai", "success" => false, "data" => []], 200);
     }
 
     public function edit(Request $request, $id)
@@ -119,10 +124,63 @@ class AbsensiController extends Controller
 
     public function report(Request $request)
     {
-        // dd($request)->all();
-        // $awal = $request->tanggal_mulai;
-        // $akhir = $request->tanggal_akhir;
-        // $hasil = Absensi::where(['tanggal_mulai', '<=', $awal], ['tanggal_akhir', '>=', $akhir]);
-        return view('absensi-report');
+
+        $dateStart = $request->tanggal_mulai ?? date('Y-m-d');
+        $dateEnd = $request->tanggal_akhir ?? date('Y-m-d');
+        $dateRange = new \DatePeriod(
+            new \DateTime($dateStart),
+            new \DateInterval('P1D'),
+            new \DateTime($dateEnd)
+        );
+//        dd($dateRange);
+        $workers = Worker::with('dept')->select('workers.*')->get();
+
+        $absensi = array();
+        $jadwal = array();
+
+        foreach ($workers as $worker){
+//            $absensi[$worker->id] = Absensi::query()->where('worker_id', '=', $worker->id)->whereBetween('tanggal', [$dateStart, $dateEnd])->get()->toArray();
+//            $jadwal[$worker->id] = Jadwal::query()->where('jadwal.worker_id', '=', $worker->id)->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->leftJoin('absensi', function ($query) use( $dateStart, $dateEnd){
+//                $query->on('jadwal.id', '=', 'absensi.jadwal_id');
+//                $query->whereBetween('tanggal', [$dateStart, $dateEnd]);
+//            })->get()->toArray();
+            $merge = [];
+            $jadwal[$worker->id] = Jadwal::query()->select('jadwal.*', 'available_jadwal.name')->where([['tanggal_akhir', '>=', $dateStart], ['tanggal_mulai', '<=', $dateEnd]])->where('jadwal.worker_id', '=', $worker->id)->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->get()->toArray();
+            foreach ($jadwal[$worker->id] as $data){
+                $absen  = Absensi::query()->where('jadwal_id', '=', $data['id'])->where('worker_id', '=', $worker->id)->get()->toArray();
+            }
+//            $jadwal[$worker->id]['absen'] = $absen;
+//            dd($absen);
+        }
+        dd($jadwal);
+//        $getWorker = Worker::with('dept')->select('workers.*', 'available_jadwal.name as name_jadwal', 'jadwal.id as jadwal_id')->join('jadwal', function ($query) use($date){
+//            $query->on('workers.id', '=', 'jadwal.worker_id');
+//            $query->where([['tanggal_mulai','<=',$date],['tanggal_akhir','>=', $date]]);
+//        })->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->where('nip', '=', $request->nip)->first();
+        $data = [
+            'dateRange' => $dateRange,
+            'workers' => $workers,
+            'jadwal' => $jadwal
+        ];
+        return view('absensi-report', $data);
+    }
+
+    public function upload(Request $request){
+//        $file = $request->file('imageFile');
+
+        $nip = $request->nip;
+//        event(new InputNipEvent($nip));
+        event(new InputNipEvent($nip));
+        $date = date('Y-m-d');
+        $getWorker = Worker::with('dept')->join('jadwal', function ($query) use ($date) {
+            $query->on('workers.id', '=', 'jadwal.worker_id');
+            $query->where([['tanggal_mulai', '<=', $date], ['tanggal_akhir', '>=', $date]]);
+        })->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->where('nip', '=', $nip)->exists();
+
+        if($getWorker){
+            return response("valid",200);
+        }
+
+        return response("invalid",404);
     }
 }

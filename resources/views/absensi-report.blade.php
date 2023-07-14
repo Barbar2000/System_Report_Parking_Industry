@@ -31,7 +31,7 @@
                             </div>
                         </div>
 
-                        <div class="card-body table-responsive" style="height: 350px;">
+                        <div class="card-body table-responsive" style="height: 80vh;">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -39,18 +39,39 @@
                                         <th style="width: 40px">NIP</th>
                                         <th>Nama</th>
                                         <th>Departemen</th>
-                                        <th>absen per periode tgl</th>
+                                        @foreach($dateRange as $value)
+                                        <th>{{$value->format('Y-m-d')}}</th>
+                                        @endforeach
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php $no = 0; ?>
+                                @foreach($workers as $worker)
+                                    <?php $no++ ?>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{$no}}</td>
+                                        <td>{{$worker->nip}}</td>
+                                        <td>{{$worker->name}}</td>
+                                        <td>{{$worker->dept->name}}</td>
+                                        @foreach($dateRange as $value)
+                                           @if(count($jadwal[$worker->id]) > 0)
+{{--                                               @foreach($jadwal[$worker->id] as $absen)--}}
+                                                <?php
+                                                    $absens = collect($jadwal[$worker->id])->where('tanggal_mulai', '=', $value->format('Y-m-d'))->orWhere('tanggal_akhir', '=', $value->format('Y-m-d'));
+                                                    ?>
+                                                   @if(!is_null($absens))
+                                                   <td>
+                                                       @foreach($absens as $absen)
+                                                           {{ $absen['deskripsi'] == 'masuk' ? $absen['jam_absen'] : $absen['jam_absen'] }}
+                                                       @endforeach
+                                                   </td>
+                                                   @else
+                                                    @endif
+{{--                                               @endforeach--}}
+                                           @endif
+                                        @endforeach
                                     </tr>
-
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
