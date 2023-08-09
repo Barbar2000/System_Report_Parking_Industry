@@ -28,7 +28,7 @@
                                     style="background-color: #5cb85c; padding: 10px; border-radius: 10px">
                                     <div style="margin: 15px; background: white;" class="body_red">
                                         <div class="row" style="background:white;border-radius: 10px">
-                                            <div class="col-sm-4 col-xs-4">
+                                            <div class="col-sm-8 col-md-4 col-xs-12">
                                                 <table class="table table-borderless">
                                                     <tbody>
                                                         <tr>
@@ -41,7 +41,9 @@
                                                                 <input id="nip" type="text" class="transparant"
                                                                     placeholder="SCAN NIP HERE" maxlength="7"
                                                                     minlength="7"
-                                                                    style="height: 40px; text-transform: uppercase; font-weight: bold; font-size: 20px; text-align: center;">
+                                                                    style="height: 40px; text-transform: uppercase; font-weight: bold; font-size: 20px; text-align: center;"
+                                                                    tabindex="1"
+                                                                    autofocus="autofocus">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -83,7 +85,7 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <div class="col-sm-1 col-xs-1">
+                                            <div class="col-sm-1 col-md-1 col-xs-12">
                                             </div>
                                             <div class="col-sm-6 col-xs-6">
                                                 <table class="table" id="table-borderless">

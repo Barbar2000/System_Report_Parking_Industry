@@ -28,7 +28,7 @@
                                     style="background-color: #d9534f; padding: 10px; border-radius: 10px">
                                     <div style="margin: 15px; background: white;" class="body_red">
                                         <div class="row" style="background:white;border-radius: 10px">
-                                            <div class="col-sm-4 col-xs-4">
+                                            <div class="col-sm-8 col-md-4 col-xs-12">
                                                 <table class="table table-borderless">
                                                     <tbody>
                                                         <tr>
@@ -41,7 +41,9 @@
                                                                 <input type="text" class="transparant" id="nip"
                                                                     placeholder="SCAN NIP HERE" maxlength="7"
                                                                     minlength="7"
-                                                                    style="height: 40px; text-transform: uppercase; font-weight: bold; font-size: 20px; text-align: center;">
+                                                                    style="height: 40px; text-transform: uppercase; font-weight: bold; font-size: 20px; text-align: center;"
+                                                                    tabindex="1"
+                                                                    autofocus="autofocus">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -66,9 +68,9 @@
                                                                             <span id="sat">SB</span>
                                                                         </div>
                                                                         <div class="text">
-                                                                            <span id="hours"></span> :
-                                                                            <span id="min"></span> :
-                                                                            <span id="sec"></span> :
+                                                                            <span id="hours"></span>
+                                                                            <span id="min"></span>
+                                                                            <span id="sec"></span>
                                                                             <span id="time"></span>
                                                                         </div>
                                                                         <div id="date">
@@ -212,5 +214,14 @@
                 });
             });
         </script>
-    </section>
+         @vite(['resources/js/app.js'])
+         <script type="module">
+             window.onload=function() {
+                 Echo.channel('input-nip')
+                     .listen('InputNipEvent', (e) => {
+                         $('#nip').val(e.nip);
+                         $('#nip').keyup();
+                     })
+             }
+         </script>
 @endsection
