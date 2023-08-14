@@ -8,10 +8,7 @@ use App\Models\Available_jadwal;
 use App\Models\Dept;
 use App\Models\Jadwal;
 use App\Models\Worker;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Zxing\QrReader;
 
 class AbsensiController extends Controller
 {
@@ -73,7 +70,7 @@ class AbsensiController extends Controller
             return response()->json(['message' => "Absen Berhasil", "success" => true, "data" => $data], 200);
         }
         // dd($data);
-         return response()->json(['message' => "Jadwal Karyawan Tidak Sesuai", "success" => false, "data" => []], 200);
+        return response()->json(['message' => "Jadwal Karyawan Tidak Sesuai", "success" => false, "data" => []], 200);
     }
 
     public function edit(Request $request, $id)
@@ -135,11 +132,11 @@ class AbsensiController extends Controller
         $workers = Worker::with('dept')->select('workers.*')->get();
         $jadwal = array();
 
-        foreach ($workers as $worker){
+        foreach ($workers as $worker) {
             $merge = [];
             $jadwal[$worker->id] = Jadwal::query()->select('jadwal.*', 'available_jadwal.name')->where([['tanggal_akhir', '>=', $dateStart], ['tanggal_mulai', '<=', $dateEnd]])->where('jadwal.worker_id', '=', $worker->id)->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->get()->toArray();
-            foreach ($jadwal[$worker->id] as $data){
-                $absen  = Absensi::query()->where('jadwal_id', '=', $data['id'])->where('worker_id', '=', $worker->id)->get()->toArray();
+            foreach ($jadwal[$worker->id] as $data) {
+                $absen = Absensi::query()->where('jadwal_id', '=', $data['id'])->where('worker_id', '=', $worker->id)->get()->toArray();
                 $data['absen'] = $absen;
                 $merge[] = $data;
             }
@@ -148,16 +145,15 @@ class AbsensiController extends Controller
         $data = [
             'dateRange' => $dateRange,
             'workers' => $workers,
-            'jadwal' => $jadwal
+            'jadwal' => $jadwal,
         ];
         return view('absensi-report', $data);
     }
 
-    public function upload(Request $request){
-//        $file = $request->file('imageFile');
-
+    public function upload(Request $request)
+    {
         $nip = $request->nip;
-//        event(new InputNipEvent($nip));
+
         event(new InputNipEvent($nip));
         $date = date('Y-m-d');
         $getWorker = Worker::with('dept')->join('jadwal', function ($query) use ($date) {
@@ -165,10 +161,10 @@ class AbsensiController extends Controller
             $query->where([['tanggal_mulai', '<=', $date], ['tanggal_akhir', '>=', $date]]);
         })->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->where('nip', '=', $nip)->exists();
 
-        if($getWorker){
-            return response("valid",200);
+        if ($getWorker) {
+            return response("NIP valid", 200);
         }
 
-        return response("invalid",404);
+        return response("NIP invalid", 404);
     }
 }
