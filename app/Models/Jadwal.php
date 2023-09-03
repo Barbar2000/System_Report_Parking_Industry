@@ -11,7 +11,7 @@ class Jadwal extends Model
 
     protected $table = 'jadwal';
 
-    protected $fillable = ['_token', '_method', 'tanggal_mulai', 'tanggal_akhir'];
+    protected $fillable = ['_token', '_method', 'tanggal_mulai', 'tanggal_akhir', 'available_jadwal_id'];
 
     public function worker() //many to one
     {

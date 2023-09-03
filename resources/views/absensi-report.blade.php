@@ -2,7 +2,6 @@
 @section('title', 'Absensi Karyawan')
 @section('content')
     {{-- {{$hasil}} --}}
-
     <section class="content-header">
         <div class="container-fluid">
         </div>
@@ -18,7 +17,6 @@
                                     <div class="input-group input-group-sm" style="width: 300px;">
                                         <input type="text" name="keyword" class="form-control float-right"
                                             placeholder="Search">
-
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fas fa-search"></i>
@@ -27,20 +25,20 @@
                                     </div>
                                 </form>
                             </div>
-                            <div>
-                            </div>
                         </div>
-
-                        <div class="card-body table-responsive" style="height: 80vh;">
-                            <table class="table table-bordered">
+                        <div class="card-body table-responsive p-0" style="height: 430px;">
+                            <table class="table table-sm table-bordered table-head-fixed text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10px">No</th>
-                                        <th style="width: 40px">NIP</th>
-                                        <th>Nama</th>
-                                        <th>Departemen</th>
+                                        <th>No</th>
+                                        <th style="text-align: center">NIP</th>
+                                        <th style="text-align: center">Nama</th>
+                                        <th style="text-align: center">Departemen</th>
                                         @foreach ($dateRange as $value)
-                                            <th>{{ $value->format('Y-m-d') }}</th>
+                                            <th style="text-align: center">{{ $value->format('D') }}
+                                                <br>
+                                                {{ $value->format('d M Y') }}
+                                            </th>
                                         @endforeach
                                     </tr>
                                 </thead>
@@ -63,7 +61,7 @@
                                                             ->first();
                                                         ?>
                                                         @if (!is_null($getJadwal))
-                                                            <p>{{ $getJadwal['name'] }}</p>
+                                                            <p style="line-height: 10px; text-align:center">{{ $getJadwal['name'] }}</p>
                                                             @if (strtolower($getJadwal['name']) != 'libur')
                                                                 @if (count($getJadwal['absen']) > 0)
                                                                     @if (strtolower($getJadwal['name']) == 'shift 3')
@@ -76,26 +74,42 @@
                                                                             ->where('deskripsi', '=', 'keluar')
                                                                             ->where('tanggal', '=', $value->modify('+1 day')->format('Y-m-d'))
                                                                             ->first();
-
                                                                         ?>
-                                                                        <p>{{ $dataMasuk['deskripsi'] . ' : ' . $dataMasuk['jam_absen'] }}
-                                                                        </p>
-                                                                        <p>{{ $dataKeluar['deskripsi'] . ' : ' . $dataKeluar['jam_absen'] }}
-                                                                        </p>
+                                                                        <p style="line-height: 5px">In&emsp;: {{ $dataMasuk['jam_absen'] }}</p>
+                                                                        <p style="line-height: 5px">Out : {{ $dataKeluar['jam_absen'] }}</p>
                                                                     @else
                                                                         <?php
-                                                                        $dataAbsen = collect($getJadwal['absen'])->where('tanggal', '=', $value->format('Y-m-d'));
+                                                                        $dataAbsenMasuk = collect($getJadwal['absen'])
+                                                                            ->where('deskripsi', '=', 'masuk')
+                                                                            ->where('tanggal', '=', $value->format('Y-m-d'));
+                                                                        $dataAbsenKeluar = collect($getJadwal['absen'])
+                                                                            ->where('deskripsi', '=', 'keluar')
+                                                                            ->where('tanggal', '=', $value->format('Y-m-d'));
                                                                         ?>
-                                                                        @foreach ($dataAbsen as $data)
-                                                                            <p>{{ $data['deskripsi'] . ' : ' . $data['jam_absen'] }}
-                                                                            </p>
+                                                                        @foreach ($dataAbsenMasuk as $data)
+                                                                            @if ($loop->first)
+                                                                                <p style="line-height: 5px">In&emsp;: {{ $data['jam_absen'] }}
+                                                                                </p>
+                                                                            @endif
+                                                                        @endforeach
+                                                                        @foreach ($dataAbsenKeluar as $data)
+                                                                            @if ($loop->last)
+                                                                                <p style="line-height: 5px">Out : {{ $data['jam_absen'] }}
+                                                                                </p>
+                                                                            @endif
                                                                         @endforeach
                                                                     @endif
                                                                 @else
-                                                                    Absen
+                                                                    Absen Kosong
                                                                 @endif
                                                             @endif
+                                                        @else
+                                                            Jadwal Kosong
                                                         @endif
+                                                    </td>
+                                                @else
+                                                    <td>
+                                                        Jadwal Kosong
                                                     </td>
                                                 @endif
                                             @endforeach
@@ -103,10 +117,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="card-footer clearfix">
-                            <ul class="pagination pagination-sm m-2 float-right">
-                            </ul>
                         </div>
                     </div>
                 </div>

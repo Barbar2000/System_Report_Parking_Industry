@@ -51,10 +51,11 @@ class AbsensiController extends Controller
     public function absen(Request $request)
     {
         $date = date('Y-m-d');
-        $getWorker = Worker::with('dept')->select('workers.*', 'available_jadwal.name as name_jadwal', 'jadwal.id as jadwal_id')->join('jadwal', function ($query) use ($date) {
-            $query->on('workers.id', '=', 'jadwal.worker_id');
-            $query->where([['tanggal_mulai', '<=', $date], ['tanggal_akhir', '>=', $date]]);
-        })->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->where('nip', '=', $request->nip)->first();
+        $getWorker = Worker::with('dept')->select('workers.*', 'available_jadwal.name as name_jadwal', 'jadwal.id as jadwal_id')
+            ->join('jadwal', function ($query) use ($date) {
+             $query->on('workers.id', '=', 'jadwal.worker_id');
+             $query->where([['tanggal_mulai', '<=', $date], ['tanggal_akhir', '>=', $date]]);
+            })->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->where('nip', '=', $request->nip)->first();
         if (!is_null($getWorker)) {
             $time = date('H:i:s');
             $absensi = new Absensi();
@@ -134,9 +135,17 @@ class AbsensiController extends Controller
 
         foreach ($workers as $worker) {
             $merge = [];
-            $jadwal[$worker->id] = Jadwal::query()->select('jadwal.*', 'available_jadwal.name')->where([['tanggal_akhir', '>=', $dateStart], ['tanggal_mulai', '<=', $dateEnd]])->where('jadwal.worker_id', '=', $worker->id)->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')->get()->toArray();
+            $jadwal[$worker->id] = Jadwal::query()
+            ->select('jadwal.*', 'available_jadwal.name')
+            ->where([['tanggal_akhir', '>=', $dateStart], ['tanggal_mulai', '<=', $dateEnd]])
+            ->where('jadwal.worker_id', '=', $worker->id)
+            ->join('available_jadwal', 'jadwal.available_jadwal_id', '=', 'available_jadwal.id')
+            ->get()->toArray();
             foreach ($jadwal[$worker->id] as $data) {
-                $absen = Absensi::query()->where('jadwal_id', '=', $data['id'])->where('worker_id', '=', $worker->id)->get()->toArray();
+                $absen = Absensi::query()
+                    ->where('jadwal_id', '=', $data['id'])
+                    ->where('worker_id', '=', $worker->id)
+                    ->get()->toArray();
                 $data['absen'] = $absen;
                 $merge[] = $data;
             }
