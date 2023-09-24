@@ -1,9 +1,3 @@
-{{-- @foreach ($absensi as $item)
-    <br>
-    {{ $item->jadwal->available_jadwal->name }}<br>
-    <br>
-    <br>
-@endforeach --}}
 @extends('layouts.sidebar')
 @section('title', 'Absensi')
 @section('content')
