@@ -122,7 +122,9 @@ class AbsensiController extends Controller
 
     public function report(Request $request)
     {
-
+        $keywordNip = $request->nip;
+        $keywordName = $request->name;
+        $keywordDept = $request->dept;
         $dateStart = $request->tanggal_mulai ?? date('Y-m-d');
         $dateEnd = $request->tanggal_akhir ?? date('Y-m-d');
         $dateRange = new \DatePeriod(
@@ -130,7 +132,11 @@ class AbsensiController extends Controller
             new \DateInterval('P1D'),
             new \DateTime($dateEnd)
         );
-        $workers = Worker::with('dept')->select('workers.*')->get();
+        $workers = Worker::with('dept')->select('workers.*')
+        ->where('nip', 'LIKE', '%' . $keywordNip . '%')
+        ->where('name', 'LIKE', '%' . $keywordName . '%')
+        ->WhereHas('dept', function ($query) use ($keywordDept){$query->where('id', 'LIKE', '%' . $keywordDept . '%');})
+        ->get();
         $jadwal = array();
 
         foreach ($workers as $worker) {

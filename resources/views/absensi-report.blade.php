@@ -12,19 +12,19 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-tools">
-                                <form action="" method="get">
+                            {{-- <div class="card-tools"> --}}
+                                {{-- <form action="" method="">
                                     <div class="input-group input-group-sm" style="width: 300px;">
                                         <input type="text" name="keyword" class="form-control float-right"
                                             placeholder="Search">
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
+                                            <button type="" class="btn btn-default">
                                                 <i class="fas fa-search"></i>
                                             </button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </form> --}}
+                            {{-- </div> --}}
                         </div>
                         <div class="card-body table-responsive p-0" style="height: 430px;">
                             <table class="table table-sm table-bordered table-head-fixed text-nowrap">

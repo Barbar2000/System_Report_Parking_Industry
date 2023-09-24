@@ -46,7 +46,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" style="width: 110px">Nama </span>
                                         </div>
-                                        <input name="Name" type="text" class="form-control" id="name"
+                                        <input name="name" type="text" class="form-control" id="name"
                                             style="text-transform: uppercase" placeholder="ALL">
                                     </div>
                                     <br>
