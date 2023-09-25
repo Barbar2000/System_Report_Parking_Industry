@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\InputNipEvent;
-use App\Models\Absensi;
-use App\Models\Available_jadwal;
 use App\Models\Dept;
 use App\Models\Jadwal;
 use App\Models\Worker;
+use App\Models\Absensi;
 use Illuminate\Http\Request;
+use App\Events\InputNipEvent;
 
 class AbsensiController extends Controller
 {
@@ -114,10 +113,10 @@ class AbsensiController extends Controller
 
     public function index_report()
     {
-        $available_jadwal = Available_jadwal::get();
+
         $dept = Dept::select('id', 'name')->get();
         // dd($worker);
-        return view('absensi-index', ['available_jadwal' => $available_jadwal, 'dept' => $dept]);
+        return view('absensi-index', ['dept' => $dept]);
     }
 
     public function report(Request $request)
@@ -135,7 +134,7 @@ class AbsensiController extends Controller
         $workers = Worker::with('dept')->select('workers.*')
         ->where('nip', 'LIKE', '%' . $keywordNip . '%')
         ->where('name', 'LIKE', '%' . $keywordName . '%')
-        ->WhereHas('dept', function ($query) use ($keywordDept){$query->where('id', 'LIKE', '%' . $keywordDept . '%');})
+        ->whereHas('dept', function ($query) use ($keywordDept){$query->where('id', 'LIKE', '%' . $keywordDept . '%');})
         ->get();
         $jadwal = array();
 

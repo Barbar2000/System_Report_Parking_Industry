@@ -61,22 +61,6 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <br>
-                                    <div class="input-group col-12">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" style="width: 110px">Jadwal</span>
-                                        </div>
-                                        <select name="available_jadwal_id" class="custom-select rounded-0"
-                                            id="available_jadwal_id">
-                                            <option value="">
-                                                ALL</option>
-                                            @foreach ($available_jadwal as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <br>
-
                                 </div>
                                 <div class="card-footer float-right">
                                     <button type="submit" class="btn btn-success btn-sm" style="width: 100px">View</button>

@@ -188,8 +188,10 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>SK - </b> Sistem Komputer
+               <b>SK - </b> Sistem Komputer
             </div>
+            <img src="lte/dist/img/LOGO RAHARJA.png" alt="Logo" class="brand-image"
+            style="opacity: .9" height="30px" width="30px">
             <strong>Copyright &copy; 2023 <a href="https://raharja.ac.id">Universitas Raharja</a>. </strong>
             1931424799.
 

@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-body table-responsive" style="height: 460px;">
+                        <div class="card-body table-responsive" style="height: 450px;">
                             <div class="lockscreen-wrapper">
                                 <div class="lockscreen-logo">
                                     <img src="lte/dist/img/logo-ikad2.png" alt="Logo" class="brand-image"

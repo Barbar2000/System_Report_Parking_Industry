@@ -26,7 +26,7 @@
                             <div class="container-fluid col-md-12 col-sm-12 col-xs-12">
                                 <div class="container-fluid col-sm-8 col-xs-12"
                                     style="background-color: #d9534f; padding: 10px; border-radius: 10px">
-                                    <div style="margin: 15px; background: white;" class="body_red">
+                                    <div style="margin: 10px; background: white;" class="body_red">
                                         <div class="row" style="background:white;border-radius: 10px">
                                             <div class="col-sm-8 col-md-4 col-xs-12">
                                                 <table class="table table-borderless">
@@ -92,72 +92,72 @@
                                                     <tbody>
                                                         <tr>
                                                             <td>
-                                                                <font style="font-size: 20px;">TANGGAL</font>
+                                                                <font style="font-size: 15px; font-weight: bold;">TANGGAL</font>
                                                             </td>
                                                             <td>:</td>
                                                             <td style="width: 200px;">
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;"
+                                                                    style="height: 15px; text-transform: uppercase; font-size: 15px; font-weight: bold;"
                                                                     id="tanggal">
                                                                 </span>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <font style="font-size: 20px;">JAM</font>
+                                                                <font style="font-size: 15px; font-weight: bold;">JAM</font>
                                                             </td>
                                                             <td>:</td>
                                                             <td>
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase; font-size: 20px;"
+                                                                    style="height: 15px; text-transform: uppercase; font-size: 15px; font-weight: bold;"
                                                                     id="jam">
                                                                 </span>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 100px;">
-                                                                <font style="font-size: 20px;">NIP</font>
+                                                                <font style="font-size: 15px; font-weight: bold;">NIP</font>
                                                             </td>
                                                             <td style="width: 1px;">:</td>
                                                             <td style="width: 200px;">
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase;  font-size: 20px;"
+                                                                    style="height: 15px; text-transform: uppercase;  font-size: 15px; font-weight: bold;"
                                                                     id="nip_detail">
                                                                 </span>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <font style="font-size: 20px;">NAMA</font>
+                                                                <font style="font-size: 15px; font-weight: bold;">NAMA</font>
                                                             </td>
                                                             <td>:</td>
                                                             <td>
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase;  font-size: 20px;"
+                                                                    style="height: 15px; text-transform: uppercase;  font-size: 15px; font-weight: bold;"
                                                                     id="name_detail">
                                                                 </span>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <font style="font-size: 20px;">DEPT </font>
+                                                                <font style="font-size: 15px; font-weight: bold;">DEPT </font>
                                                             </td>
                                                             <td>:</td>
                                                             <td>
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase;  font-size: 20px;"
+                                                                    style="height: 15px; text-transform: uppercase;  font-size: 15px; font-weight: bold;"
                                                                     id="dept_detail">
                                                                 </span>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <font style="font-size: 20px;">JADWAL </font>
+                                                                <font style="font-size: 15px; font-weight: bold;">JADWAL </font>
                                                             </td>
                                                             <td>:</td>
                                                             <td>
                                                                 <span
-                                                                    style="height: 30px; text-transform: uppercase;  font-size: 20px;"
+                                                                    style="height: 15px; text-transform: uppercase;  font-size: 15px; font-weight: bold;"
                                                                     id="jadwal_detail">
                                                                 </span>
                                                             </td>
