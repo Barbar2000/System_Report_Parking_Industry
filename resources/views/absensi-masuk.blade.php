@@ -194,7 +194,7 @@
                             success: function(response) {
                                 if (response.success === false) {
                                     toastr.warning(response.message, 'Gagal !');
-                                    // $('#nip').val("");
+                                    $('#nip').val("");
                                     document.getElementById('nip').focus();
                                 } else {
                                     console.log(response);

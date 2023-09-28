@@ -100,7 +100,6 @@
                                                                         @endforeach
                                                                     @endif
                                                                 @else
-                                                                    Absen Kosong
                                                                 @endif
                                                             @endif
                                                         @else
